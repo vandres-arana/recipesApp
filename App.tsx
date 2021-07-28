@@ -1,13 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Constants from 'expo-constants';
+import RecipeCard from './screens/RecipeCard';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+    <SafeAreaProvider style={styles.container}>
       <StatusBar style="auto" />
-    </View>
+      <Text>Recipes</Text>
+      <RecipeCard />
+    </SafeAreaProvider>
   );
 }
 
@@ -17,5 +21,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: Constants.statusBarHeight
   },
 });
