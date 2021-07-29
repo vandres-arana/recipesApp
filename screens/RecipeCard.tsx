@@ -37,6 +37,10 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width * 0.80,
         borderRadius: 10,
         padding: 0,
+        shadowColor: '#000000',
+        shadowOffset: { width: 4, height: 4 },
+        shadowOpacity: 0.2,
+        shadowRadius: 5,
     },
     image: {
         borderRadius: 10,
