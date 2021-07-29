@@ -12,11 +12,11 @@ const RecipeCard = () => {
                 source={{ uri: 'https://www.krumpli.co.uk/wp-content/uploads/2019/12/Lasagna-Bolognese-4.jpg.webp' }}>
                 <View style={styles.imageContainer}>
                     <View style={styles.topContainer}>
-                        <TouchableOpacity>
+                        <TouchableOpacity style={styles.iconContainer}>
                             <MaterialCommunityIcons name="heart-outline" size={30} color="white" />
                             <Text style={styles.topLabel}>54</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity style={styles.iconContainer}>
                             <MaterialCommunityIcons name="fridge-outline" size={24} color="white" />
                             <Text style={styles.topLabel} numberOfLines={3}>6/9</Text>
                         </TouchableOpacity>
@@ -52,6 +52,10 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginHorizontal: 20,
     },
+    iconContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
     bottomContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -59,11 +63,12 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
     },
     topLabel: {
-        color: 'white'
+        color: 'white',
+        paddingLeft: 5,
     },
     plateName: {
         color: 'white',
-        fontSize: 30,
+        fontSize: 36,
         fontWeight: '700'
     },
 })
