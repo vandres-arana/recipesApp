@@ -4,7 +4,15 @@ import { Card } from 'react-native-elements';
 import { Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-const RecipeCard = () => {
+type RecipeProps = {
+    item: any,
+    index: any
+}
+
+const RecipeCard: React.FC<RecipeProps> = ({
+    item,
+    index,
+}) => {
     return (
         <Card containerStyle={styles.card}>
             <Card.Image

@@ -3,14 +3,13 @@ import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Constants from 'expo-constants';
-import RecipeCard from './screens/RecipeCard';
+import RecipeCarousel from './screens/RecipeCarousel';
 
 export default function App() {
   return (
     <SafeAreaProvider style={styles.container}>
       <StatusBar style="auto" />
-      <Text>Recipes</Text>
-      <RecipeCard />
+      <RecipeCarousel />
     </SafeAreaProvider>
   );
 }
