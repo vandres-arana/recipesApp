@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Card } from 'react-native-elements';
 import { Dimensions } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const RecipeCard = () => {
     return (
@@ -9,10 +10,22 @@ const RecipeCard = () => {
             <Card.Image
                 style={styles.image}
                 source={{ uri: 'https://www.krumpli.co.uk/wp-content/uploads/2019/12/Lasagna-Bolognese-4.jpg.webp' }}>
+                <View style={styles.imageContainer}>
+                    <View style={styles.topContainer}>
+                        <TouchableOpacity>
+                            <MaterialCommunityIcons name="heart-outline" size={30} color="white" />
+                            <Text style={styles.topLabel}>54</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                            <MaterialCommunityIcons name="fridge-outline" size={24} color="white" />
+                            <Text style={styles.topLabel} numberOfLines={3}>6/9</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.bottomContainer}>
+                        <Text style={styles.plateName}>Lasagne</Text>
+                    </View>
+                </View>
             </Card.Image>
-            <Card.Divider />
-            <Card.FeaturedTitle style={styles.plateName}>Lasagne</Card.FeaturedTitle>
-            <Card.FeaturedSubtitle style={styles.plateName}>60 min</Card.FeaturedSubtitle>
         </Card>
     )
 }
@@ -26,12 +39,31 @@ const styles = StyleSheet.create({
         padding: 0,
     },
     image: {
-        borderTopRightRadius: 10,
-        borderTopLeftRadius: 10,
+        borderRadius: 10,
         height: Dimensions.get('window').height * 0.60,
-        marginBottom: 10,
+    },
+    imageContainer: {
+        flex: 1,
+        justifyContent: 'space-between',
+    },
+    topContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 20,
+        marginHorizontal: 20,
+    },
+    bottomContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 20,
+        marginHorizontal: 20,
+    },
+    topLabel: {
+        color: 'white'
     },
     plateName: {
-        color: 'black'
+        color: 'white',
+        fontSize: 30,
+        fontWeight: '700'
     },
 })
