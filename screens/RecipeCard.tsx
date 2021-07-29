@@ -16,10 +16,10 @@ const RecipeCard = () => {
                             <MaterialCommunityIcons name="heart-outline" size={30} color="white" />
                             <Text style={styles.topLabel}>54</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.iconContainer}>
+                        <View style={styles.iconContainer}>
                             <MaterialCommunityIcons name="fridge-outline" size={24} color="white" />
                             <Text style={styles.topLabel} numberOfLines={3}>6/9</Text>
-                        </TouchableOpacity>
+                        </View>
                     </View>
                     <View style={styles.bottomContainer}>
                         <Text style={styles.plateName}>Lasagne</Text>
