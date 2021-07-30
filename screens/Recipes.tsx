@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack';
 import RecipeCarousel from '../components/RecipeCarousel'
 import routes from '../navigation/routes';
@@ -12,12 +12,23 @@ const Recipes: React.FC<RecipesProps> = ({ navigation }) => {
     const goToRecipeDetails = () => {
         navigation.push(routes.HOME.DETAIL)
     }
-    
+
     return (
-        <RecipeCarousel goToRecipeDetails={goToRecipeDetails}/>
+        <View style={styles.container}>
+            <Text>Search Bar</Text>
+            <RecipeCarousel goToRecipeDetails={goToRecipeDetails} />
+            <Text>Filters</Text>
+        </View>
     )
 }
 
 export default Recipes
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+    },
+})

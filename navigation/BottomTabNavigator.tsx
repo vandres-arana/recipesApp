@@ -18,7 +18,7 @@ const BottomTabNavigator = () => {
             <Tab.Screen
                 name={routes.HOME.RECIPES}
                 component={Recipes} options={{
-                    tabBarLabel: 'Recipes',
+                    tabBarLabel: routes.HOME.RECIPES,
                     tabBarIcon: ({ color }) => (
                         <FontAwesome5 name="list-alt" color={color} size={24} />
                     ),
@@ -27,7 +27,7 @@ const BottomTabNavigator = () => {
                 name={routes.HOME.FAVORITE}
                 component={Favorite}
                 options={{
-                    tabBarLabel: 'Favorite',
+                    tabBarLabel: routes.HOME.FAVORITE,
                     tabBarIcon: ({ color }) => (
                         <FontAwesome5 name="heart" color={color} size={24} />
                     ),
@@ -36,7 +36,7 @@ const BottomTabNavigator = () => {
                 name={routes.HOME.SHOPLIST}
                 component={Shoplist}
                 options={{
-                    tabBarLabel: 'Shoplist',
+                    tabBarLabel: routes.HOME.SHOPLIST,
                     tabBarIcon: ({ color }) => (
                         <AntDesign name="shoppingcart" color={color} size={24} />
                     ),
@@ -45,7 +45,7 @@ const BottomTabNavigator = () => {
                 name={routes.HOME.PANTRY}
                 component={Pantry}
                 options={{
-                    tabBarLabel: 'Pantry',
+                    tabBarLabel: routes.HOME.PANTRY,
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons name="fridge-outline" color={color} size={24} />
                     ),
@@ -54,7 +54,7 @@ const BottomTabNavigator = () => {
                 name={routes.HOME.PROFILE}
                 component={Profile}
                 options={{
-                    tabBarLabel: 'Shoplist',
+                    tabBarLabel: routes.HOME.PROFILE,
                     tabBarIcon: ({ color }) => (
                         <FontAwesome5 name="user" color={color} size={24} />
                     ),
