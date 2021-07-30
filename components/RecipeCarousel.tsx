@@ -1,15 +1,17 @@
-import React, { Component } from 'react'
-import { Text, StyleSheet, Dimensions, View } from 'react-native'
+import React from 'react'
+import { StyleSheet, Dimensions, View } from 'react-native'
 import RecipeCard from './RecipeCard';
 import Carousel from 'react-native-snap-carousel';
-import { RECIPES } from '../static/recipes';
+import { Recipe } from '../models';
 
 type RecipeCarouselProps = {
-    goToRecipeDetails: () => void
+    goToRecipeDetails: () => void,
+    recipeList: Recipe[]
 }
 
 const RecipeCarousel: React.FC<RecipeCarouselProps> = ({
-    goToRecipeDetails
+    goToRecipeDetails,
+    recipeList
 }) => {
     const CarouselItem = (props: any) => {
         return <RecipeCard goToRecipeDetails={goToRecipeDetails} item={props.item} />
@@ -18,7 +20,7 @@ const RecipeCarousel: React.FC<RecipeCarouselProps> = ({
     return (
         <View style={styles.carouselContainer}>
             <Carousel
-                data={RECIPES}
+                data={recipeList}
                 renderItem={CarouselItem}
                 sliderWidth={Dimensions.get('window').width}
                 itemWidth={Dimensions.get('window').width * 0.80}
