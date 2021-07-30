@@ -3,12 +3,19 @@ import { StyleSheet, Text, View } from 'react-native'
 
 const RecipeDetail = () => {
     return (
-        <View>
-            <Text>Recipe Detail</Text>
+        <View style={styles.container}>
+            <Text>Recipe Detail Screen</Text>
+            <Text>Under Construction!</Text>
         </View>
     )
 }
 
 export default RecipeDetail
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
+})
