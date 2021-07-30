@@ -19,7 +19,6 @@ const Recipes: React.FC<RecipesProps> = ({ navigation }) => {
     }
 
     const onChangeText = (search: string) => {
-        console.log(search)
         if (search.length === 0) {
             setRecipes(RECIPES)
         } else {
