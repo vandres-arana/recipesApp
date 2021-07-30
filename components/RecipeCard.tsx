@@ -3,25 +3,28 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Card } from 'react-native-elements';
 import { Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Recipe } from '../models';
 
 type RecipeProps = {
-    goToRecipeDetails: () => void
+    goToRecipeDetails: () => void,
+    item: Recipe
 }
 
 const RecipeCard: React.FC<RecipeProps> = ({
-    goToRecipeDetails
+    goToRecipeDetails,
+    item
 }) => {
     return (
         <Card containerStyle={styles.card}>
             <Card.Image
                 style={styles.image}
-                source={{ uri: 'https://www.krumpli.co.uk/wp-content/uploads/2019/12/Lasagna-Bolognese-4.jpg.webp' }}
+                source={{ uri: item.image }}
                 onPress={goToRecipeDetails}>
                 <View style={styles.imageContainer}>
                     <View style={styles.topContainer}>
                         <TouchableOpacity style={styles.iconContainer}>
                             <MaterialCommunityIcons name="heart-outline" size={30} color="white" />
-                            <Text style={styles.topLabel}>54</Text>
+                            <Text style={styles.topLabel}>{item.likes}</Text>
                         </TouchableOpacity>
                         <View style={styles.iconContainer}>
                             <MaterialCommunityIcons name="fridge-outline" size={24} color="white" />
@@ -29,7 +32,7 @@ const RecipeCard: React.FC<RecipeProps> = ({
                         </View>
                     </View>
                     <View style={styles.bottomContainer}>
-                        <Text style={styles.plateName}>Lasagne</Text>
+                        <Text style={styles.plateName}>{item.title}</Text>
                     </View>
                 </View>
             </Card.Image>
@@ -76,6 +79,7 @@ const styles = StyleSheet.create({
     topLabel: {
         color: 'white',
         paddingLeft: 5,
+        fontWeight: '700',
     },
     plateName: {
         color: 'white',

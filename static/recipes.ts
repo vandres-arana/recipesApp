@@ -1,32 +1,52 @@
-export const RECIPES = [
+import { Recipe } from "../models";
+
+export const RECIPES: Recipe[] = [
     {
+        id: 1,
+        title: 'Toast with Salmon and Poacheg Eggs',
+        description: 'Recipe',
+        time: '15 min',
+        likes: 54,
+        image: 'https://www.killingthyme.net/wp-content/uploads/2017/01/Smoked-Salmon-and-Poached-Eggs-2.jpg',
+    },
+    {
+        id: 2,
         title: 'Lasagne',
-        description: 'Lasagne are a type of wide, flat pasta, possibly one of the oldest types of pasta. Lasagne, or the singular lasagna, is an Italian dish made of stacked layers of thin flat pasta alternating with fillings such as ragù and other vegetables, cheese, and seasonings and spices such as garlic, oregano and basil.',
-        time: '1h 40min'
+        description: 'Recipe',
+        time: '1h 40min',
+        likes: 87,
+        image: 'https://www.krumpli.co.uk/wp-content/uploads/2019/12/Lasagna-Bolognese-4.jpg.webp',
     },
     {
-        title: 'Lasagne 2',
-        description: 'Lasagne are a type of wide, flat pasta, possibly one of the oldest types of pasta. Lasagne, or the singular lasagna, is an Italian dish made of stacked layers of thin flat pasta alternating with fillings such as ragù and other vegetables, cheese, and seasonings and spices such as garlic, oregano and basil.',
-        time: '1h 40min'
+        id: 3,
+        title: 'Baked Chicken Wings',
+        description: 'Recipe',
+        time: '50min',
+        likes: 124,
+        image: 'https://www.thecookierookie.com/wp-content/uploads/2018/12/baked-chicken-wings-reshoot-2.jpg',
     },
     {
-        title: 'Lasagne 3',
-        description: 'Lasagne are a type of wide, flat pasta, possibly one of the oldest types of pasta. Lasagne, or the singular lasagna, is an Italian dish made of stacked layers of thin flat pasta alternating with fillings such as ragù and other vegetables, cheese, and seasonings and spices such as garlic, oregano and basil.',
-        time: '1h 40min'
+        id: 4,
+        title: 'Baked Spaghetti',
+        description: 'Recipe',
+        time: '1h 10min',
+        likes: 101,
+        image: 'https://www.thecookierookie.com/wp-content/uploads/2019/04/easy-baked-spaghetti-recipe-6-of-6.jpg',
     },
     {
-        title: 'Lasagne',
-        description: 'Lasagne are a type of wide, flat pasta, possibly one of the oldest types of pasta. Lasagne, or the singular lasagna, is an Italian dish made of stacked layers of thin flat pasta alternating with fillings such as ragù and other vegetables, cheese, and seasonings and spices such as garlic, oregano and basil.',
-        time: '1h 40min'
+        id: 5,
+        title: 'Oven Fried Chicken Breast',
+        description: 'Recipe',
+        time: '1h 15min',
+        likes: 77,
+        image: 'https://www.thecookierookie.com/wp-content/uploads/2014/06/baked-fried-chicken-recipe-4-of-6.jpg',
     },
     {
-        title: 'Lasagne 2',
-        description: 'Lasagne are a type of wide, flat pasta, possibly one of the oldest types of pasta. Lasagne, or the singular lasagna, is an Italian dish made of stacked layers of thin flat pasta alternating with fillings such as ragù and other vegetables, cheese, and seasonings and spices such as garlic, oregano and basil.',
-        time: '1h 40min'
-    },
-    {
-        title: 'Lasagne 3',
-        description: 'Lasagne are a type of wide, flat pasta, possibly one of the oldest types of pasta. Lasagne, or the singular lasagna, is an Italian dish made of stacked layers of thin flat pasta alternating with fillings such as ragù and other vegetables, cheese, and seasonings and spices such as garlic, oregano and basil.',
-        time: '1h 40min'
+        id: 6,
+        title: 'Pepperoni Pizza Gnocchi Bake',
+        description: 'Recipe',
+        time: '1h 20min',
+        likes: 68,
+        image: 'https://www.thecookierookie.com/wp-content/uploads/2020/08/pepperoni-pizza-gnocchi-bake-1-of-7.jpg',
     },
 ];

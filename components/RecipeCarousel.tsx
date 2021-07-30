@@ -12,7 +12,7 @@ const RecipeCarousel: React.FC<RecipeCarouselProps> = ({
     goToRecipeDetails
 }) => {
     const CarouselItem = (props: any) => {
-        return <RecipeCard goToRecipeDetails={goToRecipeDetails}/>
+        return <RecipeCard goToRecipeDetails={goToRecipeDetails} item={props.item}/>
     }
 
     return (
