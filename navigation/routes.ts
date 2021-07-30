@@ -5,7 +5,8 @@ const routes = {
         FAVORITE: 'Favorite',
         SHOPLIST: 'Shoplist',
         PANTRY: 'Pantry',
-        PROFILE: 'Profile'
+        PROFILE: 'Profile',
+        DETAIL: 'RecipeDetail'
     }
 }
 

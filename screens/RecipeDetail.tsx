@@ -1,11 +1,22 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StackNavigationProp } from '@react-navigation/stack';
 
-const RecipeDetail = () => {
+type RecipeDetailsProps = {
+    navigation: StackNavigationProp<any>
+}
+
+const RecipeDetail: React.FC<RecipeDetailsProps> = ({ navigation }) => {
+    const returnToRecipes = () => {
+        navigation.pop()
+    }
     return (
         <View style={styles.container}>
             <Text>Recipe Detail Screen</Text>
             <Text>Under Construction!</Text>
+            <TouchableOpacity onPress={returnToRecipes}>
+                <Text>Return</Text>
+            </TouchableOpacity>
         </View>
     )
 }

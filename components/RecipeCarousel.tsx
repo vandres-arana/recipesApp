@@ -4,25 +4,32 @@ import RecipeCard from './RecipeCard';
 import Carousel from 'react-native-snap-carousel';
 import { RECIPES } from '../static/recipes';
 
-class RecipeCarousel extends Component {
+type RecipeCarouselProps = {
+    goToRecipeDetails: () => void
+}
 
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text>Search Bar</Text>
-                <View style={styles.carouselContainer}>
-                    <Carousel
-                        data={RECIPES}
-                        renderItem={RecipeCard}
-                        sliderWidth={Dimensions.get('window').width}
-                        itemWidth={Dimensions.get('window').width * 0.80}
-                        contentContainerCustomStyle={styles.carousel}
-                    />
-                </View>
-                <Text>Filters</Text>
-            </ View>
-        )
+const RecipeCarousel: React.FC<RecipeCarouselProps> = ({
+    goToRecipeDetails
+}) => {
+    const CarouselItem = (props: any) => {
+        return <RecipeCard goToRecipeDetails={goToRecipeDetails}/>
     }
+
+    return (
+        <View style={styles.container}>
+            <Text onPress={goToRecipeDetails}>Search Bar</Text>
+            <View style={styles.carouselContainer}>
+                <Carousel
+                    data={RECIPES}
+                    renderItem={CarouselItem}
+                    sliderWidth={Dimensions.get('window').width}
+                    itemWidth={Dimensions.get('window').width * 0.80}
+                    contentContainerCustomStyle={styles.carousel}
+                />
+            </View>
+            <Text>Filters</Text>
+        </ View>
+    )
 }
 
 export default RecipeCarousel

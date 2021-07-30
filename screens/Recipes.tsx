@@ -1,10 +1,20 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, } from 'react-native'
+import { StackNavigationProp } from '@react-navigation/stack';
 import RecipeCarousel from '../components/RecipeCarousel'
+import routes from '../navigation/routes';
 
-const Recipes = () => {
+type RecipesProps = {
+    navigation: StackNavigationProp<any>
+}
+
+const Recipes: React.FC<RecipesProps> = ({ navigation }) => {
+    const goToRecipeDetails = () => {
+        navigation.push(routes.HOME.DETAIL)
+    }
+    
     return (
-        <RecipeCarousel />
+        <RecipeCarousel goToRecipeDetails={goToRecipeDetails}/>
     )
 }
 

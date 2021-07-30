@@ -5,19 +5,18 @@ import { Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 type RecipeProps = {
-    item: any,
-    index: any
+    goToRecipeDetails: () => void
 }
 
 const RecipeCard: React.FC<RecipeProps> = ({
-    item,
-    index,
+    goToRecipeDetails
 }) => {
     return (
         <Card containerStyle={styles.card}>
             <Card.Image
                 style={styles.image}
-                source={{ uri: 'https://www.krumpli.co.uk/wp-content/uploads/2019/12/Lasagna-Bolognese-4.jpg.webp' }}>
+                source={{ uri: 'https://www.krumpli.co.uk/wp-content/uploads/2019/12/Lasagna-Bolognese-4.jpg.webp' }}
+                onPress={goToRecipeDetails}>
                 <View style={styles.imageContainer}>
                     <View style={styles.topContainer}>
                         <TouchableOpacity style={styles.iconContainer}>
