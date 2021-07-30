@@ -9,8 +9,7 @@ class RecipeCarousel extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>Recipes</Text>
-                {/* <RecipeCard /> */}
+                <Text>Search Bar</Text>
                 <View style={styles.carouselContainer}>
                     <Carousel
                         data={RECIPES}

@@ -14,8 +14,7 @@ const BottomTabNavigator = () => {
     return (
         <Tab.Navigator
             initialRouteName={routes.HOME.RECIPES}
-            activeColor="#f0edf6"
-            barStyle={{ backgroundColor: 'green' }}>
+            barStyle={styles.tabNavigator}>
             <Tab.Screen
                 name={routes.HOME.RECIPES}
                 component={Recipes} options={{
@@ -66,4 +65,8 @@ const BottomTabNavigator = () => {
 
 export default BottomTabNavigator
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    tabNavigator: {
+        backgroundColor: 'green',
+    }
+})
