@@ -25,6 +25,8 @@ const RecipeCarousel: React.FC<RecipeCarouselProps> = ({
                 sliderWidth={Dimensions.get('window').width}
                 itemWidth={Dimensions.get('window').width * 0.80}
                 contentContainerCustomStyle={styles.carousel}
+                autoplay={true}
+                maxToRenderPerBatch={10}
             />
         </View>
     )
