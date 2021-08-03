@@ -1,39 +1,60 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack';
 import RecipeCarousel from '../components/RecipeCarousel'
 import routes from '../navigation/routes';
 import CustomSearchBar from '../components/CustomSearchBar';
 import { RECIPES } from '../static/recipes';
-import { useState } from 'react';
+import RecipesService from '../services/RecipesService';
 
-type RecipesProps = {
-    navigation: StackNavigationProp<any>
+type RecipesState = {
+    recipes: any,
 }
 
-const Recipes: React.FC<RecipesProps> = ({ navigation }) => {
-    const [recipes, setRecipes] = useState(RECIPES);
+type RecipesProps = {
+    navigation: StackNavigationProp<any>,
+}
 
-    const goToRecipeDetails = () => {
-        navigation.push(routes.HOME.DETAIL)
-    }
+class Recipes extends Component<RecipesProps, RecipesState>  {
 
-    const onChangeText = (search: string) => {
-        if (search.length === 0) {
-            setRecipes(RECIPES)
-        } else {
-            setRecipes([RECIPES[0]])
+    constructor(props: RecipesProps) {
+        super(props);
+        this.state = {
+            recipes: RECIPES,
         }
     }
 
-    console.log("RENDER")
-    return (
-        <View style={styles.container}>
-            <CustomSearchBar onChangeText={onChangeText}/>
-            <RecipeCarousel goToRecipeDetails={goToRecipeDetails} recipeList={recipes}/>
-            <Text>Filters</Text>
-        </View>
-    )
+    loadRecipes = async () => {
+        const recipesApi = await RecipesService.getRecipes();
+        // const recipe = await RecipesService.getRecipeDetails('b79327d05b8e5b838ad6cfd9576b30b6')
+        this.setState({ recipes: recipesApi })
+    }
+
+    componentDidMount() {
+        this.loadRecipes()
+    }
+
+    goToRecipeDetails = () => {
+        this.props.navigation.push(routes.HOME.DETAIL)
+    }
+
+    onChangeText = (search: string) => {
+        if (search.length === 0) {
+            this.setState({ recipes: RECIPES })
+        } else {
+            this.setState({ recipes: [RECIPES[0]] })
+        }
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <CustomSearchBar onChangeText={this.onChangeText} />
+                <RecipeCarousel goToRecipeDetails={this.goToRecipeDetails} recipeList={this.state.recipes} />
+                <Text>Filters</Text>
+            </View>
+        )
+    }
 }
 
 export default Recipes
