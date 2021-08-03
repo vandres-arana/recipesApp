@@ -6,6 +6,7 @@ import routes from '../navigation/routes';
 import CustomSearchBar from '../components/CustomSearchBar';
 import { RECIPES } from '../static/recipes';
 import RecipesService from '../services/RecipesService';
+import RecipesStorage from '../services/RecipesStorage';
 
 type RecipesState = {
     recipes: any,
@@ -25,9 +26,16 @@ class Recipes extends Component<RecipesProps, RecipesState>  {
     }
 
     loadRecipes = async () => {
-        const recipesApi = await RecipesService.getRecipes();
+        const recipesDB = await RecipesStorage.getRecipes();
+        if (recipesDB.length == 0) {
+            const recipesApi = await RecipesService.getRecipes();
+            this.setState({ recipes: recipesApi });
+            RecipesStorage.saveRecipes(recipesApi);
+            return;
+        }
+        this.setState({ recipes: recipesDB })
         // const recipe = await RecipesService.getRecipeDetails('b79327d05b8e5b838ad6cfd9576b30b6')
-        this.setState({ recipes: recipesApi })
+        
     }
 
     componentDidMount() {
