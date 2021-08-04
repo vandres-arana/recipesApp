@@ -4,6 +4,7 @@ import FiltersBar from "./FiltersBar";
 import RecipeCard from "./RecipeCard";
 import RecipeCarousel from "./RecipeCarousel";
 import RecipeDetailsCard from "./RecipeDetailsCard";
+import RecipeInfo from "./RecipeInfo";
 
 export {
     CustomSearchBar,
@@ -12,4 +13,5 @@ export {
     RecipeCard,
     RecipeCarousel,
     RecipeDetailsCard,
+    RecipeInfo,
 }
