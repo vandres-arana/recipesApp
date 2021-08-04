@@ -7,9 +7,11 @@ import CustomSearchBar from '../components/CustomSearchBar';
 import RecipesService from '../services/RecipesService';
 import RecipesStorage from '../services/RecipesStorage';
 import FiltersBar from '../components/FiltersBar';
+import { FILTERS } from '../static';
 
 type RecipesState = {
     recipes: any,
+    selectedFilter: number,
 }
 
 type RecipesProps = {
@@ -22,13 +24,14 @@ class Recipes extends Component<RecipesProps, RecipesState>  {
         super(props);
         this.state = {
             recipes: [],
+            selectedFilter: 0,
         }
     }
 
     loadRecipes = async () => {
         const recipesDB = await RecipesStorage.getRecipes();
         if (recipesDB.length == 0) {
-            const recipesApi = await RecipesService.getRecipes();
+            const recipesApi = await RecipesService.getRecipes(FILTERS[this.state.selectedFilter].title);
             this.setState({ recipes: recipesApi });
             RecipesStorage.saveRecipes(recipesApi);
             return;
@@ -54,13 +57,24 @@ class Recipes extends Component<RecipesProps, RecipesState>  {
         });
     }
 
+    filterRecipes = async (index: number) => {
+        this.setState({
+            recipes: [],
+            selectedFilter: index,
+        })
+        const recipesApi = await RecipesService.getRecipes(FILTERS[index].title);
+        this.setState({
+            recipes: recipesApi,
+        });
+    }
+
     render() {
-        const { recipes } = this.state;
+        const { recipes, selectedFilter } = this.state;
         return (
             <View style={styles.container}>
                 <CustomSearchBar changeText={this.searchRecipe} />
                 <RecipeCarousel goToRecipeDetails={this.goToRecipeDetails} recipeList={recipes} />
-                <FiltersBar />
+                <FiltersBar selectedFilter={selectedFilter} selectFilter={this.filterRecipes} />
             </View>
         )
     }

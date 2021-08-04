@@ -3,10 +3,18 @@ import { FlatList, StyleSheet, View } from 'react-native'
 import { FILTERS } from '../static'
 import Filter from './Filter'
 
-const FiltersBar = () => {
-    const filters = FILTERS
+type FiltersBarProps = {
+    selectedFilter: number,
+    selectFilter: (index: number) => void
+}
+
+const FiltersBar: React.FC<FiltersBarProps> = ({
+    selectedFilter,
+    selectFilter,
+}) => {
+    const filters = FILTERS;
     const FilterItem = (props: any) => {
-        return <Filter name={props.item} index={props.index} />
+        return <Filter item={props.item} isSelected={props.item.id === selectedFilter} selectFilter={selectFilter} />
     }
 
     const keyExtractor = (item: any, index: number) => {

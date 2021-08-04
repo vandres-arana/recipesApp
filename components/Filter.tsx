@@ -1,20 +1,27 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { FilterData } from '../models'
 import { COLORS } from '../styles'
 
-type filterProps = {
-    name: string,
-    index: number,
+type FilterProps = {
+    item: FilterData,
+    isSelected: boolean,
+    selectFilter: (index: number) => void
 }
 
-const Filter: React.FC<filterProps> = ({
-    name,
-    index,
+const Filter: React.FC<FilterProps> = ({
+    item,
+    isSelected,
+    selectFilter,
 }) => {
+    const pressFilter = () => {
+        selectFilter(item.id)
+    }
     return (
-        <View style={styles.container}>
-            <Text style={styles.label}>{name}</Text>
-        </View>
+        <TouchableOpacity style={[styles.container, { backgroundColor: isSelected ? COLORS.Color2 : COLORS.Color3 }]}
+            onPress={pressFilter}>
+            <Text style={styles.label}>{item.title}</Text>
+        </TouchableOpacity>
     )
 }
 
@@ -22,7 +29,6 @@ export default Filter
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: COLORS.Color3, //7F8B52
         paddingHorizontal: 20,
         marginHorizontal: 10,
         height: 40,

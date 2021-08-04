@@ -5,7 +5,7 @@ class RecipesService {
     static ApiId = '9c81aebf';
     static ApiKey = '3a3fa1c3a45e684ec05b93ac52328f1c';
 
-    static getRecipes = (search: string = 'chicken'): Promise<Recipe[]> => {
+    static getRecipes = (search: string): Promise<Recipe[]> => {
         const input = `${this.URL}?q=${search}&app_id=${this.ApiId}&app_key=${this.ApiKey}&type=public`
         return fetch(input)
             .then(response => response.json())
