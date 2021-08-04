@@ -3,6 +3,7 @@ import { StyleSheet, Text, ScrollView, Dimensions } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack';
 import { COLORS } from '../styles';
 import { RecipeDetailsCard } from '../components';
+import LabelList from '../components/LabelList';
 
 type RecipeDetailsProps = {
     route: any,
@@ -20,7 +21,8 @@ const RecipeDetail: React.FC<RecipeDetailsProps> = ({
     return (
         <ScrollView style={styles.container}>
             <RecipeDetailsCard recipe={recipe} returnToPreviousScreen={returnToRecipes} />
-            <Text>Holas</Text>
+            <LabelList title="labels" labels={['uno', 'dos', 'tres', 'cuatro', 'uno', 'dos', 'tres', 'cuatro']} />
+            <LabelList title="labels" labels={['uno', 'dos', 'tres', 'cuatro', 'uno', 'dos', 'tres', 'cuatro']} />
         </ScrollView>
     )
 }
