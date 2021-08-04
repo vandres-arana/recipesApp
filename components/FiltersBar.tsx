@@ -8,6 +8,10 @@ const FiltersBar = () => {
         return <Filter name={props.item} index={props.index} />
     }
 
+    const keyExtractor = (item: any, index: number) => {
+        return index.toString()
+    }
+
     return (
         <View style={styles.container}>
             <FlatList
@@ -15,6 +19,7 @@ const FiltersBar = () => {
                 data={filters}
                 renderItem={FilterItem}
                 showsHorizontalScrollIndicator={false}
+                keyExtractor={keyExtractor}
             />
         </View>
     )
