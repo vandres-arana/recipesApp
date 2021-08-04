@@ -4,6 +4,7 @@ import { Card } from 'react-native-elements';
 import { Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Recipe } from '../models';
+import { COLORS } from '../styles';
 
 type RecipeProps = {
     goToRecipeDetails: () => void,
@@ -23,11 +24,11 @@ const RecipeCard: React.FC<RecipeProps> = ({
                 <View style={styles.imageContainer}>
                     <View style={styles.topContainer}>
                         <TouchableOpacity style={styles.iconContainer}>
-                            <MaterialCommunityIcons name="heart-outline" size={30} color="white" />
+                            <MaterialCommunityIcons name="heart-outline" size={30} color={COLORS.White} />
                             <Text style={styles.topLabel}>{item.likes}</Text>
                         </TouchableOpacity>
                         <View style={styles.iconContainer}>
-                            <MaterialCommunityIcons name="fridge-outline" size={24} color="white" />
+                            <MaterialCommunityIcons name="fridge-outline" size={24} color={COLORS.White}  />
                             <Text style={styles.topLabel} numberOfLines={3}>6/9</Text>
                         </View>
                     </View>
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width * 0.80,
         borderRadius: 10,
         padding: 0,
-        shadowColor: '#000000',
+        shadowColor: COLORS.Black,
         shadowOffset: { width: 4, height: 4 },
         shadowOpacity: 0.2,
         shadowRadius: 5,
@@ -77,12 +78,12 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
     },
     topLabel: {
-        color: 'white',
+        color: COLORS.White,
         paddingLeft: 5,
         fontWeight: '700',
     },
     plateName: {
-        color: 'white',
+        color: COLORS.White,
         fontSize: 36,
         fontWeight: '700'
     },

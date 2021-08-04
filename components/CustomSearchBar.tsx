@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Dimensions, StyleSheet, TextInput, View } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
+import { COLORS } from '../styles';
 
 type SearchBarProps = {
     changeText: (search: string) => void
@@ -33,7 +34,7 @@ export default class CustomSearchBar extends Component<SearchBarProps, SearchBar
 
         return (
             <View style={styles.searchSection}>
-                <AntDesign name="search1" style={styles.searchIcon} size={24} color="black" />
+                <AntDesign name="search1" style={styles.searchIcon} size={24} color={COLORS.Color2} />
                 <TextInput
                     style={styles.input}
                     onChangeText={updateText}
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: COLORS.White,
     },
     searchIcon: {
         padding: 10,
@@ -65,8 +66,8 @@ const styles = StyleSheet.create({
         paddingRight: 10,
         paddingBottom: 10,
         paddingLeft: 0,
-        backgroundColor: 'white',
-        color: '#424242',
+        backgroundColor: COLORS.White,
+        color: COLORS.Grey,
         fontSize: 16,
     },
 })

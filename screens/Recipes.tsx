@@ -6,6 +6,7 @@ import routes from '../navigation/routes';
 import CustomSearchBar from '../components/CustomSearchBar';
 import RecipesService from '../services/RecipesService';
 import RecipesStorage from '../services/RecipesStorage';
+import FiltersBar from '../components/FiltersBar';
 
 type RecipesState = {
     recipes: any,
@@ -59,7 +60,7 @@ class Recipes extends Component<RecipesProps, RecipesState>  {
             <View style={styles.container}>
                 <CustomSearchBar changeText={this.searchRecipe} />
                 <RecipeCarousel goToRecipeDetails={this.goToRecipeDetails} recipeList={recipes} />
-                <Text>Filters</Text>
+                <FiltersBar />
             </View>
         )
     }
