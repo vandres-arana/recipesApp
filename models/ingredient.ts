@@ -1,5 +1,5 @@
 export default interface Ingredient {
-    title: string;
+    text: string;
     weight: number;
     image: string | null;
 }

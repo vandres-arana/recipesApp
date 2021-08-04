@@ -5,6 +5,7 @@ import { COLORS } from '../styles';
 import { RecipeDetailsCard, RecipeInfo } from '../components';
 import LabelList from '../components/LabelList';
 import { LABELS } from '../static';
+import Ingredients from '../components/Ingredients';
 
 type RecipeDetailsProps = {
     route: any,
@@ -26,6 +27,7 @@ const RecipeDetail: React.FC<RecipeDetailsProps> = ({
             <LabelList title={LABELS.DIET} labels={recipe.dietLabels} />
             <LabelList title={LABELS.HEALTH} labels={recipe.healthLabels} />
             <LabelList title={LABELS.CAUTION} labels={recipe.cautionLabels} />
+            <Ingredients ingredients={recipe.ingredients}/>
         </ScrollView>
     )
 }
