@@ -4,7 +4,6 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import RecipeCarousel from '../components/RecipeCarousel'
 import routes from '../navigation/routes';
 import CustomSearchBar from '../components/CustomSearchBar';
-import { RECIPES } from '../static/recipes';
 import RecipesService from '../services/RecipesService';
 import RecipesStorage from '../services/RecipesStorage';
 
@@ -21,7 +20,7 @@ class Recipes extends Component<RecipesProps, RecipesState>  {
     constructor(props: RecipesProps) {
         super(props);
         this.state = {
-            recipes: RECIPES,
+            recipes: [],
         }
     }
 
@@ -34,8 +33,6 @@ class Recipes extends Component<RecipesProps, RecipesState>  {
             return;
         }
         this.setState({ recipes: recipesDB })
-        // const recipe = await RecipesService.getRecipeDetails('b79327d05b8e5b838ad6cfd9576b30b6')
-        
     }
 
     componentDidMount() {
@@ -46,19 +43,22 @@ class Recipes extends Component<RecipesProps, RecipesState>  {
         this.props.navigation.push(routes.HOME.DETAIL)
     }
 
-    onChangeText = (search: string) => {
-        if (search.length === 0) {
-            this.setState({ recipes: RECIPES })
-        } else {
-            this.setState({ recipes: [RECIPES[0]] })
-        }
+    searchRecipe = async (search: string) => {
+        this.setState({
+            recipes: [],
+        })
+        const recipesApi = await RecipesService.getRecipes(search);
+        this.setState({
+            recipes: recipesApi,
+        });
     }
 
     render() {
+        const { recipes } = this.state;
         return (
             <View style={styles.container}>
-                <CustomSearchBar onChangeText={this.onChangeText} />
-                <RecipeCarousel goToRecipeDetails={this.goToRecipeDetails} recipeList={this.state.recipes} />
+                <CustomSearchBar changeText={this.searchRecipe} />
+                <RecipeCarousel goToRecipeDetails={this.goToRecipeDetails} recipeList={recipes} />
                 <Text>Filters</Text>
             </View>
         )

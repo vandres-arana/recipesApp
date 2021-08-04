@@ -6,12 +6,12 @@ import { Recipe } from '../models';
 
 type RecipeCarouselProps = {
     goToRecipeDetails: () => void,
-    recipeList: Recipe[]
+    recipeList: Recipe[],
 }
 
 const RecipeCarousel: React.FC<RecipeCarouselProps> = ({
     goToRecipeDetails,
-    recipeList
+    recipeList,
 }) => {
     const CarouselItem = (props: any) => {
         return <RecipeCard goToRecipeDetails={goToRecipeDetails} item={props.item} />
@@ -25,7 +25,6 @@ const RecipeCarousel: React.FC<RecipeCarouselProps> = ({
                 sliderWidth={Dimensions.get('window').width}
                 itemWidth={Dimensions.get('window').width * 0.80}
                 contentContainerCustomStyle={styles.carousel}
-                autoplay={true}
                 maxToRenderPerBatch={10}
             />
         </View>

@@ -3,7 +3,7 @@ import { Dimensions, StyleSheet, TextInput, View } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 
 type SearchBarProps = {
-    onChangeText: (search: string) => void
+    changeText: (search: string) => void
 }
 
 type SearchBarState = {
@@ -20,11 +20,15 @@ export default class CustomSearchBar extends Component<SearchBarProps, SearchBar
 
     render() {
         const { search } = this.state;
-        const { onChangeText } = this.props;
 
-        const onUpdateText = (search: string) => {
-            this.setState({ search })
-            onChangeText(search)
+        const updateText = (search: string) => {
+            this.setState({ search });
+        }
+
+        const submitSearch = () => {
+            const { changeText } = this.props;
+            changeText(search)
+            this.setState({ search: '' })
         }
 
         return (
@@ -32,7 +36,8 @@ export default class CustomSearchBar extends Component<SearchBarProps, SearchBar
                 <AntDesign name="search1" style={styles.searchIcon} size={24} color="black" />
                 <TextInput
                     style={styles.input}
-                    onChangeText={onUpdateText}
+                    onChangeText={updateText}
+                    onSubmitEditing={submitSearch}
                     value={search}
                     placeholder="Search recipes..."
                     keyboardType="default"
