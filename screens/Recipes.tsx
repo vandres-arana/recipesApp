@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack';
-import RecipeCarousel from '../components/RecipeCarousel'
 import routes from '../navigation/routes';
-import CustomSearchBar from '../components/CustomSearchBar';
+import { RecipeCarousel, CustomSearchBar, FiltersBar } from '../components';
 import RecipesService from '../services/RecipesService';
 import RecipesStorage from '../services/RecipesStorage';
-import FiltersBar from '../components/FiltersBar';
 import { FILTERS } from '../static';
 import { COLORS } from '../styles';
 import { Recipe } from '../models';

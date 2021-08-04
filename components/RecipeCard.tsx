@@ -1,7 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import {
+    StyleSheet,
+    Text,
+    View,
+    TouchableOpacity,
+    Dimensions
+} from 'react-native';
 import { Card } from 'react-native-elements';
-import { Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Recipe } from '../models';
 import { COLORS } from '../styles';
@@ -28,7 +33,7 @@ const RecipeCard: React.FC<RecipeProps> = ({
                             <Text style={styles.topLabel}>{item.likes}</Text>
                         </TouchableOpacity>
                         <View style={styles.iconContainer}>
-                            <MaterialCommunityIcons name="fridge-outline" size={30} color={COLORS.White}  />
+                            <MaterialCommunityIcons name="fridge-outline" size={30} color={COLORS.White} />
                             <Text style={styles.topLabel} numberOfLines={3}>6/9</Text>
                         </View>
                     </View>

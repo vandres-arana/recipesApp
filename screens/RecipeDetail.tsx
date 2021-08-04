@@ -1,9 +1,8 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View, ScrollView, ImageBackground } from 'react-native'
+import { StyleSheet, Text, ScrollView, Dimensions } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack';
-import { AntDesign } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { COLORS } from '../styles';
+import { RecipeDetailsCard } from '../components';
 
 type RecipeDetailsProps = {
     route: any,
@@ -20,37 +19,8 @@ const RecipeDetail: React.FC<RecipeDetailsProps> = ({
     }
     return (
         <ScrollView style={styles.container}>
-            <ImageBackground source={{ uri: recipe.image }}
-                style={styles.image}>
-                <View style={styles.imageContainer}>
-                    <View style={styles.topContainer}>
-                        <TouchableOpacity
-                            style={styles.iconContainer}
-                            onPress={returnToRecipes}>
-                            <AntDesign name="left" size={30} color={COLORS.White} />
-                        </TouchableOpacity>
-                        <View style={styles.topRightContainer}>
-                            <TouchableOpacity style={styles.iconContainer}>
-                                <MaterialCommunityIcons name="heart-outline" size={30} color={COLORS.White} />
-                                <Text style={styles.topLabel}>{recipe.likes}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.iconContainer}>
-                                <AntDesign name="sharealt" size={30} color={COLORS.White} style={styles.icon} />
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.iconContainer}>
-                                <MaterialCommunityIcons name="eye-off-outline" size={30} color={COLORS.White} />
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    <View style={styles.bottomContainer}>
-                        <Text style={styles.recipeTitle}>{recipe.title}</Text>
-                        <View style={styles.iconContainer}>
-                            <MaterialCommunityIcons name="fridge-outline" size={30} color={COLORS.White} />
-                            <Text style={styles.topLabel} numberOfLines={3}>6/9</Text>
-                        </View>
-                    </View>
-                </View>
-            </ImageBackground>
+            <RecipeDetailsCard recipe={recipe} returnToPreviousScreen={returnToRecipes} />
+            <Text>Holas</Text>
         </ScrollView>
     )
 }
@@ -62,7 +32,7 @@ const styles = StyleSheet.create({
     },
     image: {
         width: '100%',
-        height: 300
+        height: Dimensions.get('window').height * 0.40,
     },
     imageContainer: {
         flex: 1,
