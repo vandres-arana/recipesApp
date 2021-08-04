@@ -50,6 +50,7 @@ class Recipes extends Component<RecipesProps, RecipesState>  {
     searchRecipe = async (search: string) => {
         this.setState({
             recipes: [],
+            selectedFilter: -1,
         })
         const recipesApi = await RecipesService.getRecipes(search);
         this.setState({
