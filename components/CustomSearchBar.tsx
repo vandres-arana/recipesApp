@@ -50,7 +50,7 @@ export default class CustomSearchBar extends Component<SearchBarProps, SearchBar
 
 const styles = StyleSheet.create({
     searchSection: {
-        width: Dimensions.get('window').width * 0.80,
+        width: Dimensions.get('window').width * 0.90,
         height: 40,
         borderRadius: 20,
         flexDirection: 'row',

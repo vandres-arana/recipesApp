@@ -8,6 +8,7 @@ import RecipesService from '../services/RecipesService';
 import RecipesStorage from '../services/RecipesStorage';
 import FiltersBar from '../components/FiltersBar';
 import { FILTERS } from '../static';
+import { COLORS } from '../styles';
 
 type RecipesState = {
     recipes: any,
@@ -89,5 +90,6 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-around',
+        backgroundColor: COLORS.Color4,
     },
 })
