@@ -7,7 +7,7 @@ import { Recipe } from '../models';
 import { COLORS } from '../styles';
 
 type RecipeProps = {
-    goToRecipeDetails: () => void,
+    goToRecipeDetails: (recipe: Recipe) => void,
     item: Recipe
 }
 
@@ -20,7 +20,7 @@ const RecipeCard: React.FC<RecipeProps> = ({
             <Card.Image
                 style={styles.image}
                 source={{ uri: item.image }}
-                onPress={goToRecipeDetails}>
+                onPress={() => goToRecipeDetails(item)}>
                 <View style={styles.imageContainer}>
                     <View style={styles.topContainer}>
                         <TouchableOpacity style={styles.iconContainer}>

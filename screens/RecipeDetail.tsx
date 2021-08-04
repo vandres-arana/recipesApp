@@ -1,12 +1,18 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack';
+import { Recipe } from '../models';
 
 type RecipeDetailsProps = {
-    navigation: StackNavigationProp<any>
+    route: any,
+    navigation: StackNavigationProp<any>,
 }
 
-const RecipeDetail: React.FC<RecipeDetailsProps> = ({ navigation }) => {
+const RecipeDetail: React.FC<RecipeDetailsProps> = ({
+    route,
+    navigation,
+}) => {
+    const { recipe } = route.params;
     const returnToRecipes = () => {
         navigation.pop()
     }

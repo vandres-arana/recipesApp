@@ -5,7 +5,7 @@ import Carousel from 'react-native-snap-carousel';
 import { Recipe } from '../models';
 
 type RecipeCarouselProps = {
-    goToRecipeDetails: () => void,
+    goToRecipeDetails: (recipe: Recipe) => void,
     recipeList: Recipe[],
 }
 

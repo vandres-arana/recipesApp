@@ -9,6 +9,7 @@ import RecipesStorage from '../services/RecipesStorage';
 import FiltersBar from '../components/FiltersBar';
 import { FILTERS } from '../static';
 import { COLORS } from '../styles';
+import { Recipe } from '../models';
 
 type RecipesState = {
     recipes: any,
@@ -44,8 +45,8 @@ class Recipes extends Component<RecipesProps, RecipesState>  {
         this.loadRecipes()
     }
 
-    goToRecipeDetails = () => {
-        this.props.navigation.push(routes.HOME.DETAIL)
+    goToRecipeDetails = (recipe: Recipe) => {
+        this.props.navigation.push(routes.HOME.DETAIL, { recipe: recipe })
     }
 
     searchRecipe = async (search: string) => {
