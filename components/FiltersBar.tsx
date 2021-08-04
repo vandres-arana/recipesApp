@@ -1,9 +1,10 @@
 import React from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
+import { FILTERS } from '../static'
 import Filter from './Filter'
 
 const FiltersBar = () => {
-    const filters = ['Italian', 'Mexican', 'American', 'Breakfast', 'Lunch', 'Dinner', 'Apple']
+    const filters = FILTERS
     const FilterItem = (props: any) => {
         return <Filter name={props.item} index={props.index} />
     }
