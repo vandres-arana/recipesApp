@@ -28,7 +28,7 @@ const RecipeCard: React.FC<RecipeProps> = ({
                             <Text style={styles.topLabel}>{item.likes}</Text>
                         </TouchableOpacity>
                         <View style={styles.iconContainer}>
-                            <MaterialCommunityIcons name="fridge-outline" size={24} color={COLORS.White}  />
+                            <MaterialCommunityIcons name="fridge-outline" size={30} color={COLORS.White}  />
                             <Text style={styles.topLabel} numberOfLines={3}>6/9</Text>
                         </View>
                     </View>
