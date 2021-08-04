@@ -18,7 +18,7 @@ const LabelList: React.FC<LabelListProps> = ({
     const displayFullList = () => {
         setIsFullListDisplayed(!isFullListDisplayed)
     }
-    var labelList = labels.slice(0, 3)
+    var labelList = labels.slice(0, 2);
     if (isFullListDisplayed) {
         labelList = labels;
     }
@@ -46,10 +46,13 @@ export default LabelList
 const styles = StyleSheet.create({
     container: {
         marginHorizontal: 10,
-        marginTop: 10,
+        marginTop: 15,
     },
     title: {
         marginHorizontal: 10,
+        fontSize: 16,
+        fontWeight: '700',
+        color: COLORS.Color2
     },
     list: {
         flexDirection: 'row',
@@ -63,9 +66,5 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.Color3,
         borderRadius: 5,
         justifyContent: 'center'
-    },
-    label: {
-        color: COLORS.White,
-        fontSize: 16,
     },
 })

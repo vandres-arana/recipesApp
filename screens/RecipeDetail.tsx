@@ -22,9 +22,9 @@ const RecipeDetail: React.FC<RecipeDetailsProps> = ({
     return (
         <ScrollView style={styles.container}>
             <RecipeDetailsCard recipe={recipe} returnToPreviousScreen={returnToRecipes} />
-            <LabelList title={LABELS.DIET} labels={['uno', 'dos']} />
-            <LabelList title={LABELS.HEALTH} labels={['uno', 'dos', 'tres', 'cuatro', 'uno', 'dos', 'tres', 'cuatro']} />
-            <LabelList title={LABELS.CAUTION} labels={['uno', 'dos', 'tres', 'cuatro', 'uno', 'dos', 'tres', 'cuatro']} />
+            <LabelList title={LABELS.DIET} labels={recipe.dietLabels} />
+            <LabelList title={LABELS.HEALTH} labels={recipe.healthLabels} />
+            <LabelList title={LABELS.CAUTION} labels={recipe.cautionLabels} />
         </ScrollView>
     )
 }
