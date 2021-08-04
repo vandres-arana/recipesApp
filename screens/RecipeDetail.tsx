@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, ScrollView, Dimensions } from 'react-native'
+import { StyleSheet, ScrollView, Dimensions } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack';
 import { COLORS } from '../styles';
 import { RecipeDetailsCard } from '../components';

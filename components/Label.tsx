@@ -16,7 +16,6 @@ const Label: React.FC<LabelProps> = ({
     )
 }
 
-
 export default Label
 
 const styles = StyleSheet.create({
