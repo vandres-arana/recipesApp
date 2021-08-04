@@ -4,6 +4,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { COLORS } from '../styles';
 import { RecipeDetailsCard } from '../components';
 import LabelList from '../components/LabelList';
+import { LABELS } from '../static';
 
 type RecipeDetailsProps = {
     route: any,
@@ -21,8 +22,9 @@ const RecipeDetail: React.FC<RecipeDetailsProps> = ({
     return (
         <ScrollView style={styles.container}>
             <RecipeDetailsCard recipe={recipe} returnToPreviousScreen={returnToRecipes} />
-            <LabelList title="labels" labels={['uno', 'dos', 'tres', 'cuatro', 'uno', 'dos', 'tres', 'cuatro']} />
-            <LabelList title="labels" labels={['uno', 'dos', 'tres', 'cuatro', 'uno', 'dos', 'tres', 'cuatro']} />
+            <LabelList title={LABELS.DIET} labels={['uno', 'dos']} />
+            <LabelList title={LABELS.HEALTH} labels={['uno', 'dos', 'tres', 'cuatro', 'uno', 'dos', 'tres', 'cuatro']} />
+            <LabelList title={LABELS.CAUTION} labels={['uno', 'dos', 'tres', 'cuatro', 'uno', 'dos', 'tres', 'cuatro']} />
         </ScrollView>
     )
 }
