@@ -53,7 +53,7 @@ const FiltersBottomSheet: React.FC<FiltersBottomSheetProps> = ({
         if (sheetRef.current != null) {
             sheetRef.current.snapTo(0);
         }
-        filterRecipes([dietSelectedFilter, healthSelectedFilter, cuisineSelectedFilter, mealSelectedFilter, dietSelectedFilter])
+        filterRecipes([dietSelectedFilter, healthSelectedFilter, cuisineSelectedFilter, mealSelectedFilter, dishSlectedFilter])
     }
 
     const renderContent = () => (

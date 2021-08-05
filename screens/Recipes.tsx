@@ -82,10 +82,10 @@ class Recipes extends Component<RecipesProps, RecipesState>  {
     }
 
     filterRecipes = async (values: number[]) => {
-        // const recipesApi = await RecipesService.getRecipesWithValues(this.state.currentSearch, values);
-        // this.setState({
-        //     recipes: recipesApi,
-        // });
+        const recipesApi = await RecipesService.getRecipesWithValues(this.state.currentSearch, values);
+        this.setState({
+            recipes: recipesApi,
+        });
     }
 
     render() {

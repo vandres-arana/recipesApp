@@ -46,32 +46,32 @@ export const FILTERS: FilterData[] = [
 export const DIETFILTERS: FilterData[] = [
     {
         id: 0,
-        title: 'Balanced',
+        title: 'balanced',
         isSelected: false,
     },
     {
         id: 1,
-        title: 'High-fiber',
+        title: 'high-fiber',
         isSelected: false,
     },
     {
         id: 2,
-        title: 'High-protein',
+        title: 'high-protein',
         isSelected: false,
     },
     {
         id: 3,
-        title: 'Low-carb',
+        title: 'low-carb',
         isSelected: false,
     },
     {
         id: 4,
-        title: 'Low-fat',
+        title: 'low-fat',
         isSelected: false,
     },
     {
         id: 5,
-        title: 'Low-sodium',
+        title: 'low-sodium',
         isSelected: false,
     },
 ];
