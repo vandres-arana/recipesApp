@@ -29,8 +29,8 @@ const RecipeDetail: React.FC<RecipeDetailsProps> = ({
             <LabelList title={LABELS.HEALTH} labels={recipe.healthLabels} />
             <LabelList title={LABELS.CAUTION} labels={recipe.cautionLabels} />
             <Ingredients ingredients={recipe.ingredients} />
+            <RecipeVideo url={'B6sxE9HAdkQ'}/>
             <NutritionInformation digests={recipe.nutritionInformation}/>
-            <RecipeVideo url={''}/>
         </ScrollView>
     )
 }

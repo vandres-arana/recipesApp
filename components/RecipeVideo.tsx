@@ -16,9 +16,9 @@ const RecipeVideo: React.FC<RecipeVideoProps> = ({
         <View style={styles.container}>
             <Text style={styles.title}>{LABELS.TUTORIAL}</Text>
             <YoutubePlayer
-                height={300}
+                height={220}
                 play={true}
-                videoId={"B6sxE9HAdkQ"}
+                videoId={url}
             />
         </View>
     )

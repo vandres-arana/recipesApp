@@ -39,6 +39,7 @@ export default NutritionInformation
 
 const styles = StyleSheet.create({
     container: {
+        paddingTop: 10,
         height: 150,
         paddingHorizontal: 20,
         justifyContent: 'center',

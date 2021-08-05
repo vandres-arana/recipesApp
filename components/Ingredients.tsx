@@ -28,7 +28,7 @@ export default Ingredients
 const styles = StyleSheet.create({
     container: {
         marginHorizontal: 20,
-        marginVertical: 10,
+        marginTop: 10,
     },
     title: {
         color: COLORS.Color2,
