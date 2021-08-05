@@ -79,32 +79,32 @@ export const DIETFILTERS: FilterData[] = [
 export const HEALTHFILTERS: FilterData[] = [
     {
         id: 0,
-        title: 'Alcohol-free',
+        title: 'alcohol-free',
         isSelected: false,
     },
     {
         id: 1,
-        title: 'Celery-free',
+        title: 'celery-free',
         isSelected: false,
     },
     {
         id: 2,
-        title: 'Crustacean-free',
+        title: 'crustacean-free',
         isSelected: false,
     },
     {
         id: 3,
-        title: 'Dairy-free',
+        title: 'dairy-free',
         isSelected: false,
     },
     {
         id: 4,
-        title: 'Egg-free',
+        title: 'egg-free',
         isSelected: false,
     },
     {
         id: 5,
-        title: 'Fish-free',
+        title: 'fish-free',
         isSelected: false,
     },
 ];
