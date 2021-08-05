@@ -7,12 +7,14 @@ import { COLORS } from '../styles';
 
 type FiltersBarProps = {
     selectedFilter: number,
-    selectFilter: (index: number) => void
+    selectFilter: (index: number) => void,
+    displayFilters: () => void,
 }
 
 const FiltersBar: React.FC<FiltersBarProps> = ({
     selectedFilter,
     selectFilter,
+    displayFilters
 }) => {
     const filters = FILTERS;
     const FilterItem = (props: any) => {
@@ -23,13 +25,10 @@ const FiltersBar: React.FC<FiltersBarProps> = ({
         return index.toString()
     }
 
-    const displayFiltersModal = () => {
-    }
-
     return (
         <View style={styles.container}>
             <View style={styles.innerContainer}>
-                <TouchableOpacity style={styles.labelContainer} onPress={displayFiltersModal}>
+                <TouchableOpacity style={styles.labelContainer} onPress={() => displayFilters()}>
                     <Octicons name="settings" size={24} color={COLORS.White} />
                 </TouchableOpacity>
                 <FlatList

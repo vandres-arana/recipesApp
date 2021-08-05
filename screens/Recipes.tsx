@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack';
 import routes from '../navigation/routes';
-import { RecipeCarousel, CustomSearchBar, FiltersBar } from '../components';
+import { RecipeCarousel, CustomSearchBar, FiltersBar, FiltersBottomSheet } from '../components';
 import RecipesService from '../services/RecipesService';
 import RecipesStorage from '../services/RecipesStorage';
 import { FILTERS } from '../static';
@@ -12,11 +12,14 @@ import { Recipe } from '../models';
 type RecipesState = {
     recipes: any,
     selectedFilter: number,
+    displayFiltersSheet: boolean,
 }
 
 type RecipesProps = {
     navigation: StackNavigationProp<any>,
 }
+
+
 
 class Recipes extends Component<RecipesProps, RecipesState>  {
 
@@ -25,6 +28,7 @@ class Recipes extends Component<RecipesProps, RecipesState>  {
         this.state = {
             recipes: [],
             selectedFilter: 0,
+            displayFiltersSheet: false,
         }
     }
 
@@ -69,14 +73,21 @@ class Recipes extends Component<RecipesProps, RecipesState>  {
         });
     }
 
+    displayFiltersSheet = () => {
+        this.setState({ displayFiltersSheet: true })
+    }
+
     render() {
-        const { recipes, selectedFilter } = this.state;
+        const { recipes, selectedFilter, displayFiltersSheet } = this.state;
         return (
-            <View style={styles.container}>
-                <CustomSearchBar changeText={this.searchRecipe} />
-                <RecipeCarousel goToRecipeDetails={this.goToRecipeDetails} recipeList={recipes} />
-                <FiltersBar selectedFilter={selectedFilter} selectFilter={this.filterRecipes} />
-            </View>
+            <>
+                <View style={styles.container}>
+                    <CustomSearchBar changeText={this.searchRecipe} />
+                    <RecipeCarousel goToRecipeDetails={this.goToRecipeDetails} recipeList={recipes} />
+                    <FiltersBar selectedFilter={selectedFilter} selectFilter={this.filterRecipes} displayFilters={this.displayFiltersSheet} />
+                </View>
+                <FiltersBottomSheet display={displayFiltersSheet} />
+            </>
         )
     }
 }
