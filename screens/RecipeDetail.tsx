@@ -1,11 +1,12 @@
 import React from 'react'
-import { StyleSheet, ScrollView, Dimensions } from 'react-native'
+import { StyleSheet, ScrollView, Dimensions, Text } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack';
 import { COLORS } from '../styles';
 import { RecipeDetailsCard, RecipeInfo } from '../components';
 import LabelList from '../components/LabelList';
 import { LABELS } from '../static';
 import Ingredients from '../components/Ingredients';
+import NutritionInformation from '../components/NutritionInformation';
 
 type RecipeDetailsProps = {
     route: any,
@@ -23,11 +24,13 @@ const RecipeDetail: React.FC<RecipeDetailsProps> = ({
     return (
         <ScrollView style={styles.container}>
             <RecipeDetailsCard recipe={recipe} returnToPreviousScreen={returnToRecipes} />
-            <RecipeInfo totalTime={recipe.time} calories={recipe.calories}/>
+            <RecipeInfo totalTime={recipe.time} calories={recipe.calories} />
             <LabelList title={LABELS.DIET} labels={recipe.dietLabels} />
             <LabelList title={LABELS.HEALTH} labels={recipe.healthLabels} />
             <LabelList title={LABELS.CAUTION} labels={recipe.cautionLabels} />
-            <Ingredients ingredients={recipe.ingredients}/>
+            <Ingredients ingredients={recipe.ingredients} />
+            <NutritionInformation digests={recipe.nutritionInformation}/>
+            <Text style={{ paddingHorizontal: 20}}>Video</Text>
         </ScrollView>
     )
 }

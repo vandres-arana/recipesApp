@@ -5,6 +5,7 @@ import RecipeCard from "./RecipeCard";
 import RecipeCarousel from "./RecipeCarousel";
 import RecipeDetailsCard from "./RecipeDetailsCard";
 import RecipeInfo from "./RecipeInfo";
+import CircularProgress from "./CircularProgress";
 
 export {
     CustomSearchBar,
@@ -14,4 +15,5 @@ export {
     RecipeCarousel,
     RecipeDetailsCard,
     RecipeInfo,
+    CircularProgress,
 }
