@@ -1,7 +1,9 @@
 import React from 'react'
-import { FlatList, StyleSheet, View } from 'react-native'
+import { FlatList, StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import { FILTERS } from '../static'
 import Filter from './Filter'
+import { Octicons } from '@expo/vector-icons';
+import { COLORS } from '../styles';
 
 type FiltersBarProps = {
     selectedFilter: number,
@@ -21,15 +23,23 @@ const FiltersBar: React.FC<FiltersBarProps> = ({
         return index.toString()
     }
 
+    const displayFiltersModal = () => {
+    }
+
     return (
         <View style={styles.container}>
-            <FlatList
-                horizontal={true}
-                data={filters}
-                renderItem={FilterItem}
-                showsHorizontalScrollIndicator={false}
-                keyExtractor={keyExtractor}
-            />
+            <View style={styles.innerContainer}>
+                <TouchableOpacity style={styles.labelContainer} onPress={displayFiltersModal}>
+                    <Octicons name="settings" size={24} color={COLORS.White} />
+                </TouchableOpacity>
+                <FlatList
+                    horizontal={true}
+                    data={filters}
+                    renderItem={FilterItem}
+                    showsHorizontalScrollIndicator={false}
+                    keyExtractor={keyExtractor}
+                />
+            </View>
         </View>
     )
 }
@@ -39,5 +49,17 @@ export default FiltersBar
 const styles = StyleSheet.create({
     container: {
         height: 50,
-    }
+    },
+    innerContainer: {
+        flexDirection: 'row',
+        paddingHorizontal: 30,
+    },
+    labelContainer: {
+        paddingHorizontal: 10,
+        marginHorizontal: 10,
+        height: 40,
+        backgroundColor: COLORS.Color3,
+        borderRadius: 5,
+        justifyContent: 'center'
+    },
 })
