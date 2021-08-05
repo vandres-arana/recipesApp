@@ -6,4 +6,5 @@ export const LABELS = {
     CALORIES: 'Calories',
     TOTALTIME: 'Cooking time',
     DIGEST: 'Nutrition information',
+    TUTORIAL: 'Video Tutorial',
 }

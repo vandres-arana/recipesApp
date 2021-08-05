@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, ScrollView, Dimensions, Text } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack';
 import { COLORS } from '../styles';
-import { RecipeDetailsCard, RecipeInfo } from '../components';
+import { RecipeDetailsCard, RecipeInfo, RecipeVideo } from '../components';
 import LabelList from '../components/LabelList';
 import { LABELS } from '../static';
 import Ingredients from '../components/Ingredients';
@@ -30,7 +30,7 @@ const RecipeDetail: React.FC<RecipeDetailsProps> = ({
             <LabelList title={LABELS.CAUTION} labels={recipe.cautionLabels} />
             <Ingredients ingredients={recipe.ingredients} />
             <NutritionInformation digests={recipe.nutritionInformation}/>
-            <Text style={{ paddingHorizontal: 20}}>Video</Text>
+            <RecipeVideo url={''}/>
         </ScrollView>
     )
 }
