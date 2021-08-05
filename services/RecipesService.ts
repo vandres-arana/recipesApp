@@ -1,4 +1,5 @@
 import { Recipe, RecipeApi, recipeWrapper } from "../models";
+import { Helpers } from "../utils";
 
 class RecipesService {
     static URL = 'https://api.edamam.com/api/recipes/v2';
@@ -25,6 +26,20 @@ class RecipesService {
             .then(response => {
                 const recipeFromApi = response as RecipeApi
                 return recipeWrapper(recipeFromApi);
+            })
+    }
+
+    static getRecipesWithValues = (search: string, values: number[]): Promise<Recipe[]> => {
+        var input = `${this.URL}?q=${search}&app_id=${this.ApiId}&app_key=${this.ApiKey}&type=public`
+        console.log(Helpers.constructQueryParams(values))
+        return fetch(input)
+            .then(response => response.json())
+            .then(response => {
+                const recipesFromApi = response.hits as RecipeApi[]
+                return recipesFromApi.map(recipeWrapper);
+            }).catch(error => {
+                console.log(error);
+                return [];
             })
     }
 }

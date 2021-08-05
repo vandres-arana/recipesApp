@@ -13,6 +13,7 @@ type RecipesState = {
     recipes: any,
     selectedFilter: number,
     displayFiltersSheet: boolean,
+    currentSearch: string,
 }
 
 type RecipesProps = {
@@ -29,13 +30,14 @@ class Recipes extends Component<RecipesProps, RecipesState>  {
             recipes: [],
             selectedFilter: 0,
             displayFiltersSheet: false,
+            currentSearch: FILTERS[0].title,
         }
     }
 
     loadRecipes = async () => {
         const recipesDB = await RecipesStorage.getRecipes();
         if (recipesDB.length == 0) {
-            const recipesApi = await RecipesService.getRecipes(FILTERS[this.state.selectedFilter].title);
+            const recipesApi = await RecipesService.getRecipes(this.state.currentSearch);
             this.setState({ recipes: recipesApi });
             RecipesStorage.saveRecipes(recipesApi);
             return;
@@ -55,6 +57,7 @@ class Recipes extends Component<RecipesProps, RecipesState>  {
         this.setState({
             recipes: [],
             selectedFilter: -1,
+            currentSearch: search,
         })
         const recipesApi = await RecipesService.getRecipes(search);
         this.setState({
@@ -62,12 +65,13 @@ class Recipes extends Component<RecipesProps, RecipesState>  {
         });
     }
 
-    filterRecipes = async (index: number) => {
+    filterPopularRecipes = async (index: number) => {
         this.setState({
             recipes: [],
             selectedFilter: index,
+            currentSearch: FILTERS[index].title,
         })
-        const recipesApi = await RecipesService.getRecipes(FILTERS[index].title);
+        const recipesApi = await RecipesService.getRecipes(this.state.currentSearch);
         this.setState({
             recipes: recipesApi,
         });
@@ -77,6 +81,13 @@ class Recipes extends Component<RecipesProps, RecipesState>  {
         this.setState({ displayFiltersSheet: true })
     }
 
+    filterRecipes = async (values: number[]) => {
+        // const recipesApi = await RecipesService.getRecipesWithValues(this.state.currentSearch, values);
+        // this.setState({
+        //     recipes: recipesApi,
+        // });
+    }
+
     render() {
         const { recipes, selectedFilter, displayFiltersSheet } = this.state;
         return (
@@ -84,9 +95,9 @@ class Recipes extends Component<RecipesProps, RecipesState>  {
                 <View style={styles.container}>
                     <CustomSearchBar changeText={this.searchRecipe} />
                     <RecipeCarousel goToRecipeDetails={this.goToRecipeDetails} recipeList={recipes} />
-                    <FiltersBar selectedFilter={selectedFilter} selectFilter={this.filterRecipes} displayFilters={this.displayFiltersSheet} />
+                    <FiltersBar selectedFilter={selectedFilter} selectFilter={this.filterPopularRecipes} displayFilters={this.displayFiltersSheet} />
                 </View>
-                <FiltersBottomSheet display={displayFiltersSheet} />
+                <FiltersBottomSheet filterRecipes={this.filterRecipes} display={displayFiltersSheet} />
             </>
         )
     }

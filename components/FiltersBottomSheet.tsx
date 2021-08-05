@@ -8,10 +8,12 @@ import BottomFilterBar from './BottomFilterBar';
 
 type FiltersBottomSheetProps = {
     display: boolean,
+    filterRecipes: (values: number[]) => void
 }
 
 const FiltersBottomSheet: React.FC<FiltersBottomSheetProps> = ({
     display,
+    filterRecipes,
 }) => {
     const [dietSelectedFilter, setDietSelectedFilter] = useState(-1);
     const [healthSelectedFilter, sethealthSelectedFilter] = useState(-1);
@@ -39,15 +41,30 @@ const FiltersBottomSheet: React.FC<FiltersBottomSheetProps> = ({
         }
     }
 
+    const resetFilters = () => {
+        setDietSelectedFilter(-1);
+        sethealthSelectedFilter(-1);
+        setcuisineSelectedFilter(-1);
+        setmealSelectedFilter(-1);
+        setdishSlectedFilter(-1);
+    }
+
+    const closeModal = () => {
+        if (sheetRef.current != null) {
+            sheetRef.current.snapTo(0);
+        }
+        filterRecipes([dietSelectedFilter, healthSelectedFilter, cuisineSelectedFilter, mealSelectedFilter, dietSelectedFilter])
+    }
+
     const renderContent = () => (
         <View style={styles.container}>
             <View style={styles.topContainer}>
                 <Text style={styles.title}>Filters</Text>
                 <View style={styles.topButtons}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={resetFilters}>
                         <Text style={styles.button}>Reset</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={closeModal}>
                         <Text style={styles.button}>Go!</Text>
                     </TouchableOpacity>
                 </View>
