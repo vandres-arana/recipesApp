@@ -32,7 +32,6 @@ class RecipesService {
     static getRecipesWithValues = (search: string, values: number[]): Promise<Recipe[]> => {
         const query = Helpers.constructQueryParams(values)
         var input = `${this.URL}?q=${search}&app_id=${this.ApiId}&app_key=${this.ApiKey}&type=public${query}`
-        console.log(input)
         return fetch(input)
             .then(response => response.json())
             .then(response => {
