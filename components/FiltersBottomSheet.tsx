@@ -1,15 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler';
 import BottomSheet from 'reanimated-bottom-sheet';
+import { CUISINEFILTERS, DIETFILTERS, DISHFILTERS, HEALTHFILTERS, MEALFILTERS } from '../static';
 import { COLORS } from '../styles';
+import BottomFilterBar from './BottomFilterBar';
 
 type FiltersBottomSheetProps = {
     display: boolean,
 }
 
 const FiltersBottomSheet: React.FC<FiltersBottomSheetProps> = ({
-    display
+    display,
 }) => {
+    const [dietSelectedFilter, setDietSelectedFilter] = useState(-1);
+    const [healthSelectedFilter, sethealthSelectedFilter] = useState(-1);
+    const [cuisineSelectedFilter, setcuisineSelectedFilter] = useState(-1);
+    const [mealSelectedFilter, setmealSelectedFilter] = useState(-1);
+    const [dishSlectedFilter, setdishSlectedFilter] = useState(-1);
+
+    const selectFilter = (barId: number, index: number) => {
+        switch (barId) {
+            case 0:
+                setDietSelectedFilter(index);
+                break;
+            case 1:
+                sethealthSelectedFilter(index);
+                break;
+            case 2:
+                setcuisineSelectedFilter(index);
+                break;
+            case 3:
+                setmealSelectedFilter(index);
+                break;
+            case 4:
+                setdishSlectedFilter(index);
+                break;
+        }
+    }
+
     const renderContent = () => (
         <View style={styles.container}>
             <View style={styles.topContainer}>
@@ -23,6 +52,28 @@ const FiltersBottomSheet: React.FC<FiltersBottomSheetProps> = ({
                     </TouchableOpacity>
                 </View>
             </View>
+            <ScrollView>
+                <View style={styles.filterContainer}>
+                    <Text style={styles.subtitle}>Diet type</Text>
+                    <BottomFilterBar barId={0} filters={DIETFILTERS} selectFilter={selectFilter} selectedFilter={dietSelectedFilter} />
+                </View>
+                <View style={styles.filterContainer}>
+                    <Text style={styles.subtitle}>Health</Text>
+                    <BottomFilterBar barId={1} filters={HEALTHFILTERS} selectFilter={selectFilter} selectedFilter={healthSelectedFilter} />
+                </View>
+                <View style={styles.filterContainer}>
+                    <Text style={styles.subtitle}>Cuisine Type</Text>
+                    <BottomFilterBar barId={2} filters={CUISINEFILTERS} selectFilter={selectFilter} selectedFilter={cuisineSelectedFilter} />
+                </View>
+                <View style={styles.filterContainer}>
+                    <Text style={styles.subtitle}>Meal Type</Text>
+                    <BottomFilterBar barId={3} filters={MEALFILTERS} selectFilter={selectFilter} selectedFilter={mealSelectedFilter} />
+                </View>
+                <View style={styles.filterContainer}>
+                    <Text style={styles.subtitle}>Dish Type</Text>
+                    <BottomFilterBar barId={4} filters={DISHFILTERS} selectFilter={selectFilter} selectedFilter={dishSlectedFilter} />
+                </View>
+            </ScrollView>
         </View>
     );
 
@@ -76,5 +127,15 @@ const styles = StyleSheet.create({
         color: COLORS.Color3,
         fontWeight: '800',
         fontSize: 16,
-    }
+    },
+    subtitle: {
+        color: COLORS.Color2,
+        fontWeight: '700',
+        fontSize: 16,
+        paddingBottom: 10,
+    },
+    filterContainer: {
+        paddingHorizontal: 20,
+        paddingTop: 20,
+    },
 })

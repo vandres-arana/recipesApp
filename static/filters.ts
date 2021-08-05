@@ -42,3 +42,163 @@ export const FILTERS: FilterData[] = [
         isSelected: false,
     },
 ];
+
+export const DIETFILTERS: FilterData[] = [
+    {
+        id: 0,
+        title: 'Balanced',
+        isSelected: false,
+    },
+    {
+        id: 1,
+        title: 'High-fiber',
+        isSelected: false,
+    },
+    {
+        id: 2,
+        title: 'High-protein',
+        isSelected: false,
+    },
+    {
+        id: 3,
+        title: 'Low-carb',
+        isSelected: false,
+    },
+    {
+        id: 4,
+        title: 'Low-fat',
+        isSelected: false,
+    },
+    {
+        id: 5,
+        title: 'Low-sodium',
+        isSelected: false,
+    },
+];
+
+export const HEALTHFILTERS: FilterData[] = [
+    {
+        id: 0,
+        title: 'Alcohol-free',
+        isSelected: false,
+    },
+    {
+        id: 1,
+        title: 'Celery-free',
+        isSelected: false,
+    },
+    {
+        id: 2,
+        title: 'Crustacean-free',
+        isSelected: false,
+    },
+    {
+        id: 3,
+        title: 'Dairy-free',
+        isSelected: false,
+    },
+    {
+        id: 4,
+        title: 'Egg-free',
+        isSelected: false,
+    },
+    {
+        id: 5,
+        title: 'Fish-free',
+        isSelected: false,
+    },
+];
+
+export const CUISINEFILTERS: FilterData[] = [
+    {
+        id: 0,
+        title: 'American',
+        isSelected: false,
+    },
+    {
+        id: 1,
+        title: 'Asian',
+        isSelected: false,
+    },
+    {
+        id: 2,
+        title: 'British',
+        isSelected: false,
+    },
+    {
+        id: 3,
+        title: 'Chinese',
+        isSelected: false,
+    },
+    {
+        id: 4,
+        title: 'French',
+        isSelected: false,
+    },
+    {
+        id: 5,
+        title: 'Indian',
+        isSelected: false,
+    },
+];
+
+export const MEALFILTERS: FilterData[] = [
+    {
+        id: 0,
+        title: 'Breakfast',
+        isSelected: false,
+    },
+    {
+        id: 1,
+        title: 'Dinner',
+        isSelected: false,
+    },
+    {
+        id: 2,
+        title: 'Lunch',
+        isSelected: false,
+    },
+    {
+        id: 3,
+        title: 'Snack',
+        isSelected: false,
+    },
+    {
+        id: 4,
+        title: 'Teatime',
+        isSelected: false,
+    },
+];
+
+export const DISHFILTERS: FilterData[] = [
+    {
+        id: 0,
+        title: 'Cereals',
+        isSelected: false,
+    },
+    {
+        id: 1,
+        title: 'Bread',
+        isSelected: false,
+    },
+    {
+        id: 2,
+        title: 'Pancake',
+        isSelected: false,
+    },
+    {
+        id: 3,
+        title: 'Preps',
+        isSelected: false,
+    },
+    {
+        id: 4,
+        title: 'Salad',
+        isSelected: false,
+    },
+    {
+        id: 5,
+        title: 'Sandwiches',
+        isSelected: false,
+    },
+];

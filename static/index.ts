@@ -1,9 +1,14 @@
-import { FILTERS } from "./filters";
+import { FILTERS, DIETFILTERS, HEALTHFILTERS, CUISINEFILTERS, MEALFILTERS, DISHFILTERS } from "./filters";
 import { RECIPES } from "./recipes";
 import { LABELS } from "./labels";
 
 export {
     FILTERS,
+    DIETFILTERS,
+    HEALTHFILTERS,
+    CUISINEFILTERS,
+    MEALFILTERS,
+    DISHFILTERS,
     RECIPES,
     LABELS,
 }
