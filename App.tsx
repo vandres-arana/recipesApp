@@ -4,13 +4,17 @@ import { StyleSheet } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Constants from 'expo-constants';
 import Navigation from './navigation';
+import { Provider } from 'react-redux';
+import store from './store';
 
 export default function App() {
   return (
-    <SafeAreaProvider style={styles.container}>
-      <StatusBar style="auto" />
-      <Navigation />
-    </SafeAreaProvider>
+    <Provider store={store}>
+      <SafeAreaProvider style={styles.container}>
+        <StatusBar style="auto" />
+        <Navigation />
+      </SafeAreaProvider>
+    </Provider>
   );
 }
 
