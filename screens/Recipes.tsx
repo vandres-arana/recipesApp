@@ -23,14 +23,8 @@ type RecipesProps = {
 const Recipes: React.FC<RecipesProps> = ({
     navigation,
 }) => {
-    const [displayFiltersSheet, setDisplayFiltersSheet] = useState(false);
-
     const goToRecipeDetails = (recipe: Recipe) => {
         navigation.push(routes.HOME.DETAIL, { recipe: recipe })
-    }
-
-    const displayBottomFiltersSheet = () => {
-        setDisplayFiltersSheet(true)
     }
 
     return (
@@ -38,9 +32,9 @@ const Recipes: React.FC<RecipesProps> = ({
             <View style={styles.container}>
                 <CustomSearchBar />
                 <RecipeCarousel goToRecipeDetails={goToRecipeDetails} />
-                <FiltersBar displayFilters={displayBottomFiltersSheet} />
+                <FiltersBar />
             </View>
-            <FiltersBottomSheet display={displayFiltersSheet} />
+            <FiltersBottomSheet />
         </>
     )
 }

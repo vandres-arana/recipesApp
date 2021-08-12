@@ -11,6 +11,7 @@ type InitialStateProps = {
     loading: boolean,
     recipes: Recipe[],
     currentSearch: FilterData,
+    displayBottomSheet: boolean,
     dietType: string,
     healthType: string,
     mealType: string,
@@ -22,6 +23,7 @@ const initialState: InitialStateProps = {
     loading: false,
     recipes: [],
     currentSearch: FILTERS[0],
+    displayBottomSheet: false,
     dietType: '',
     healthType: '',
     mealType: '',
@@ -42,6 +44,9 @@ const recipeSlice = createSlice({
         markAsFavorite(state, action: PayloadAction<string>) {
             const foundIndex = state.recipes.findIndex(recipe => recipe.title === action.payload)
         },
+        displayBottomSheet(state, action: PayloadAction<boolean>) {
+            state.displayBottomSheet = action.payload
+        },
         resetFilters(state) {
             state.currentSearch = FILTERS[0]
         }
@@ -60,6 +65,6 @@ const recipeSlice = createSlice({
     }
 });
 
-export const { loadRecipes, updateSearch } = recipeSlice.actions;
+export const { loadRecipes, updateSearch, displayBottomSheet } = recipeSlice.actions;
 
 export default recipeSlice.reducer;

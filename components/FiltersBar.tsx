@@ -4,17 +4,13 @@ import { FILTERS } from '../static'
 import Filter from './Filter'
 import { Octicons } from '@expo/vector-icons';
 import { COLORS } from '../styles';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store';
+import { displayBottomSheet } from '../store/recipeSlice';
 
-type FiltersBarProps = {
-    displayFilters: () => void,
-}
-
-const FiltersBar: React.FC<FiltersBarProps> = ({
-    displayFilters
-}) => {
+const FiltersBar: React.FC = () => {
     const filters = FILTERS;
+    const dispatch = useDispatch()
     const selectedFilter = useSelector((state: RootState) => state.recipes.currentSearch.id)
     const FilterItem = (props: any) => {
         return <Filter item={props.item} isSelected={props.item.id === selectedFilter} />
@@ -22,6 +18,10 @@ const FiltersBar: React.FC<FiltersBarProps> = ({
 
     const keyExtractor = (item: any, index: number) => {
         return index.toString()
+    }
+
+    const displayFilters = () => {
+        dispatch(displayBottomSheet(true))
     }
 
     return (

@@ -1,18 +1,17 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
+import { useDispatch, useSelector } from 'react-redux';
 import BottomSheet from 'reanimated-bottom-sheet';
 import { CUISINEFILTERS, DIETFILTERS, DISHFILTERS, HEALTHFILTERS, MEALFILTERS } from '../static';
+import { RootState } from '../store';
+import { displayBottomSheet } from '../store/recipeSlice';
 import { COLORS } from '../styles';
 import BottomFilterBar from './BottomFilterBar';
 
-type FiltersBottomSheetProps = {
-    display: boolean,
-}
-
-const FiltersBottomSheet: React.FC<FiltersBottomSheetProps> = ({
-    display,
-}) => {
+const FiltersBottomSheet: React.FC = () => {
+    const dispatch = useDispatch()
+    const display = useSelector((state: RootState) => state.recipes.displayBottomSheet)
     const [dietSelectedFilter, setDietSelectedFilter] = useState(-1);
     const [healthSelectedFilter, sethealthSelectedFilter] = useState(-1);
     const [cuisineSelectedFilter, setcuisineSelectedFilter] = useState(-1);
@@ -48,6 +47,10 @@ const FiltersBottomSheet: React.FC<FiltersBottomSheetProps> = ({
     }
 
     const closeModal = () => {
+        dispatch(displayBottomSheet(false))
+    }
+
+    const applyFilters = () => {
         if (sheetRef.current != null) {
             sheetRef.current.snapTo(0);
         }
@@ -110,6 +113,7 @@ const FiltersBottomSheet: React.FC<FiltersBottomSheetProps> = ({
             snapPoints={[0, Dimensions.get('window').height * 0.75]}
             borderRadius={10}
             renderContent={renderContent}
+            onCloseEnd={closeModal}
         />
     )
 }
