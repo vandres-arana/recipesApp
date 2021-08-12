@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import errorHandler from "../middlewares/error-management";
 import logger from "../middlewares/logger";
+import thunk from 'redux-thunk';
 import recipeRecucer from "./recipeSlice";
 
-const middlewares = [
-    logger,
-    errorHandler,
+const middlewares: any = [
+    thunk,
+    // logger,
+    // errorHandler,
 ]
 
 const store = configureStore({

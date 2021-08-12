@@ -99,7 +99,7 @@ class Recipes extends Component<RecipesProps, RecipesState>  {
             <>
                 <View style={styles.container}>
                     <CustomSearchBar changeText={this.searchRecipe} />
-                    <RecipeCarousel goToRecipeDetails={this.goToRecipeDetails} recipeList={recipes} />
+                    <RecipeCarousel goToRecipeDetails={this.goToRecipeDetails} />
                     <FiltersBar selectedFilter={selectedFilter} selectFilter={this.filterPopularRecipes} displayFilters={this.displayFiltersSheet} />
                 </View>
                 <FiltersBottomSheet filterRecipes={this.filterRecipes} display={displayFiltersSheet} />
