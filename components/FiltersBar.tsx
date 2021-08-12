@@ -1,24 +1,23 @@
 import React from 'react'
-import { FlatList, StyleSheet, View, Text, TouchableOpacity } from 'react-native'
+import { FlatList, StyleSheet, View, TouchableOpacity } from 'react-native'
 import { FILTERS } from '../static'
 import Filter from './Filter'
 import { Octicons } from '@expo/vector-icons';
 import { COLORS } from '../styles';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 
 type FiltersBarProps = {
-    selectedFilter: number,
-    selectFilter: (index: number) => void,
     displayFilters: () => void,
 }
 
 const FiltersBar: React.FC<FiltersBarProps> = ({
-    selectedFilter,
-    selectFilter,
     displayFilters
 }) => {
     const filters = FILTERS;
+    const selectedFilter = useSelector((state: RootState) => state.recipes.currentSearch.id)
     const FilterItem = (props: any) => {
-        return <Filter item={props.item} isSelected={props.item.id === selectedFilter} selectFilter={selectFilter} />
+        return <Filter item={props.item} isSelected={props.item.id === selectedFilter} />
     }
 
     const keyExtractor = (item: any, index: number) => {

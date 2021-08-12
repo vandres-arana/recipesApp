@@ -16,7 +16,7 @@ const RecipeCarousel: React.FC<RecipeCarouselProps> = ({
 }) => {
     const dispatch = useDispatch()
     const recipeList = useSelector((state: RootState) => state.recipes.recipes)
-    const currentSearch = useSelector((state: RootState) => state.recipes.currentSearch)
+    const currentSearch = useSelector((state: RootState) => state.recipes.currentSearch.title)
 
     const CarouselItem = (props: any) => {
         return <RecipeCard goToRecipeDetails={goToRecipeDetails} item={props.item} />

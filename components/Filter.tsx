@@ -1,22 +1,25 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { useDispatch } from 'react-redux'
 import { FilterData } from '../models'
+import { loadRecipesFromApi, updateSearch } from '../store/recipeSlice'
 import { COLORS } from '../styles'
 
 type FilterProps = {
     item: FilterData,
     isSelected: boolean,
-    selectFilter: (index: number) => void
 }
 
 const Filter: React.FC<FilterProps> = ({
     item,
     isSelected,
-    selectFilter,
 }) => {
+    const dispatch = useDispatch()
     const pressFilter = () => {
-        selectFilter(item.id)
+        dispatch(updateSearch(item))
+        dispatch(loadRecipesFromApi(item.title))
     }
+
     return (
         <TouchableOpacity style={[styles.container, { backgroundColor: isSelected ? COLORS.Color2 : COLORS.Color3 }]}
             onPress={pressFilter}>

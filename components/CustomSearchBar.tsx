@@ -7,6 +7,7 @@ import { loadRecipesFromApi, updateSearch } from '../store/recipeSlice';
 
 const CustomSearchBar: React.FC = () => {
     const dispatch = useDispatch();
+
     const [searchRecipe, setSearchRecipe] = useState('');
 
     const updateText = (search: string) => {
@@ -14,7 +15,10 @@ const CustomSearchBar: React.FC = () => {
     }
 
     const submitSearch = () => {
-        dispatch(updateSearch(searchRecipe))
+        dispatch(updateSearch({
+            id: -1,
+            title: searchRecipe
+        }))
         dispatch(loadRecipesFromApi(searchRecipe));
     }
 
@@ -32,12 +36,6 @@ const CustomSearchBar: React.FC = () => {
             />
         </View>
     )
-
-    // render() {
-    //     const { search } = this.state;
-
-
-    // }
 
 }
 

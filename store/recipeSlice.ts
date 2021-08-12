@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { Recipe } from '../models'
+import { FilterData, Recipe } from '../models'
 import RecipesService from '../services/RecipesService';
 import { FILTERS } from '../static';
 
@@ -10,7 +10,7 @@ export const loadRecipesFromApi = createAsyncThunk('recipes/loadRecipes', (searc
 type InitialStateProps = {
     loading: boolean,
     recipes: Recipe[],
-    currentSearch: string,
+    currentSearch: FilterData,
     dietType: string,
     healthType: string,
     mealType: string,
@@ -21,7 +21,7 @@ type InitialStateProps = {
 const initialState: InitialStateProps = {
     loading: false,
     recipes: [],
-    currentSearch: FILTERS[0].title,
+    currentSearch: FILTERS[0],
     dietType: '',
     healthType: '',
     mealType: '',
@@ -36,14 +36,14 @@ const recipeSlice = createSlice({
         loadRecipes(state, action: PayloadAction<Recipe[]>) {
             state.recipes = action.payload;
         },
-        updateSearch(state, action: PayloadAction<string>) {
-            state.currentSearch = action.payload;
+        updateSearch(state, action: PayloadAction<FilterData>) {
+            state.currentSearch = action.payload
         },
         markAsFavorite(state, action: PayloadAction<string>) {
             const foundIndex = state.recipes.findIndex(recipe => recipe.title === action.payload)
         },
         resetFilters(state) {
-            state.currentSearch = FILTERS[0].title
+            state.currentSearch = FILTERS[0]
         }
     },
     extraReducers: builder => {
