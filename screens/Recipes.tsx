@@ -53,18 +53,6 @@ class Recipes extends Component<RecipesProps, RecipesState>  {
         this.props.navigation.push(routes.HOME.DETAIL, { recipe: recipe })
     }
 
-    searchRecipe = async (search: string) => {
-        this.setState({
-            recipes: [],
-            selectedFilter: -1,
-            currentSearch: search,
-        })
-        const recipesApi = await RecipesService.getRecipes(search);
-        this.setState({
-            recipes: recipesApi,
-        });
-    }
-
     filterPopularRecipes = async (index: number) => {
         this.setState({
             recipes: [],
@@ -98,7 +86,7 @@ class Recipes extends Component<RecipesProps, RecipesState>  {
         return (
             <>
                 <View style={styles.container}>
-                    <CustomSearchBar changeText={this.searchRecipe} />
+                    <CustomSearchBar />
                     <RecipeCarousel goToRecipeDetails={this.goToRecipeDetails} />
                     <FiltersBar selectedFilter={selectedFilter} selectFilter={this.filterPopularRecipes} displayFilters={this.displayFiltersSheet} />
                 </View>

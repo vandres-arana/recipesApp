@@ -36,11 +36,8 @@ const recipeSlice = createSlice({
         loadRecipes(state, action: PayloadAction<Recipe[]>) {
             state.recipes = action.payload;
         },
-        increment(state) {
-            state.counter++;
-        },
-        decrement(state, action) {
-            state.counter -= action.payload;
+        updateSearch(state, action: PayloadAction<string>) {
+            state.currentSearch = action.payload;
         },
         markAsFavorite(state, action: PayloadAction<string>) {
             const foundIndex = state.recipes.findIndex(recipe => recipe.title === action.payload)
@@ -63,6 +60,6 @@ const recipeSlice = createSlice({
     }
 });
 
-export const { increment, decrement, loadRecipes } = recipeSlice.actions;
+export const { loadRecipes, updateSearch } = recipeSlice.actions;
 
 export default recipeSlice.reducer;

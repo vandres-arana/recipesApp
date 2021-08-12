@@ -1,52 +1,47 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { Dimensions, StyleSheet, TextInput, View } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import { COLORS } from '../styles';
+import { useDispatch } from 'react-redux';
+import { loadRecipesFromApi, updateSearch } from '../store/recipeSlice';
 
-type SearchBarProps = {
-    changeText: (search: string) => void
-}
+const CustomSearchBar: React.FC = () => {
+    const dispatch = useDispatch();
+    const [searchRecipe, setSearchRecipe] = useState('');
 
-type SearchBarState = {
-    search: string;
-}
-
-export default class CustomSearchBar extends Component<SearchBarProps, SearchBarState> {
-    constructor(props: any) {
-        super(props);
-        this.state = {
-            search: '',
-        };
+    const updateText = (search: string) => {
+        setSearchRecipe(search);
     }
 
-    render() {
-        const { search } = this.state;
-
-        const updateText = (search: string) => {
-            this.setState({ search });
-        }
-
-        const submitSearch = () => {
-            const { changeText } = this.props;
-            changeText(search)
-            this.setState({ search: '' })
-        }
-
-        return (
-            <View style={styles.searchSection}>
-                <AntDesign name="search1" style={styles.searchIcon} size={24} color={COLORS.Color2} />
-                <TextInput
-                    style={styles.input}
-                    onChangeText={updateText}
-                    onSubmitEditing={submitSearch}
-                    value={search}
-                    placeholder="Search recipes..."
-                    keyboardType="default"
-                />
-            </View>
-        )
+    const submitSearch = () => {
+        dispatch(updateSearch(searchRecipe))
+        dispatch(loadRecipesFromApi(searchRecipe));
     }
+
+    return (
+        <View style={styles.searchSection}>
+
+            <AntDesign name="search1" style={styles.searchIcon} size={24} color={COLORS.Color2} />
+            <TextInput
+                style={styles.input}
+                onChangeText={updateText}
+                onSubmitEditing={submitSearch}
+                value={searchRecipe}
+                placeholder="Search recipes..."
+                keyboardType="default"
+            />
+        </View>
+    )
+
+    // render() {
+    //     const { search } = this.state;
+
+
+    // }
+
 }
+
+export default CustomSearchBar
 
 const styles = StyleSheet.create({
     searchSection: {
