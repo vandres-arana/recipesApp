@@ -8,12 +8,10 @@ import BottomFilterBar from './BottomFilterBar';
 
 type FiltersBottomSheetProps = {
     display: boolean,
-    filterRecipes: (values: number[]) => void
 }
 
 const FiltersBottomSheet: React.FC<FiltersBottomSheetProps> = ({
     display,
-    filterRecipes,
 }) => {
     const [dietSelectedFilter, setDietSelectedFilter] = useState(-1);
     const [healthSelectedFilter, sethealthSelectedFilter] = useState(-1);
@@ -53,7 +51,7 @@ const FiltersBottomSheet: React.FC<FiltersBottomSheetProps> = ({
         if (sheetRef.current != null) {
             sheetRef.current.snapTo(0);
         }
-        filterRecipes([dietSelectedFilter, healthSelectedFilter, cuisineSelectedFilter, mealSelectedFilter, dishSlectedFilter])
+        // filterRecipes([dietSelectedFilter, healthSelectedFilter, cuisineSelectedFilter, mealSelectedFilter, dishSlectedFilter])
     }
 
     const renderContent = () => (

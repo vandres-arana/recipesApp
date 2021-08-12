@@ -8,6 +8,7 @@ import RecipesStorage from '../services/RecipesStorage';
 import { FILTERS } from '../static';
 import { COLORS } from '../styles';
 import { Recipe } from '../models';
+import { useState } from 'react';
 
 type RecipesState = {
     displayFiltersSheet: boolean,
@@ -19,48 +20,29 @@ type RecipesProps = {
 
 
 
-class Recipes extends Component<RecipesProps, RecipesState>  {
+const Recipes: React.FC<RecipesProps> = ({
+    navigation,
+}) => {
+    const [displayFiltersSheet, setDisplayFiltersSheet] = useState(false);
 
-    constructor(props: RecipesProps) {
-        super(props);
-        this.state = {
-            displayFiltersSheet: false,
-        }
+    const goToRecipeDetails = (recipe: Recipe) => {
+        navigation.push(routes.HOME.DETAIL, { recipe: recipe })
     }
 
-    goToRecipeDetails = (recipe: Recipe) => {
-        this.props.navigation.push(routes.HOME.DETAIL, { recipe: recipe })
+    const displayBottomFiltersSheet = () => {
+        setDisplayFiltersSheet(true)
     }
 
-    displayFiltersSheet = () => {
-        this.setState({ displayFiltersSheet: true })
-    }
-
-    filterRecipes = async (values: number[]) => {
-        // this.setState({
-        //     recipes: [],
-        //     displayFiltersSheet: false,
-        // })
-        // const recipesApi = await RecipesService.getRecipesWithValues(this.state.currentSearch, values);
-        // this.setState({
-        //     recipes: recipesApi,
-        //     displayFiltersSheet: false,
-        // });
-    }
-
-    render() {
-        const { displayFiltersSheet } = this.state;
-        return (
-            <>
-                <View style={styles.container}>
-                    <CustomSearchBar />
-                    <RecipeCarousel goToRecipeDetails={this.goToRecipeDetails} />
-                    <FiltersBar displayFilters={this.displayFiltersSheet} />
-                </View>
-                <FiltersBottomSheet filterRecipes={this.filterRecipes} display={displayFiltersSheet} />
-            </>
-        )
-    }
+    return (
+        <>
+            <View style={styles.container}>
+                <CustomSearchBar />
+                <RecipeCarousel goToRecipeDetails={goToRecipeDetails} />
+                <FiltersBar displayFilters={displayBottomFiltersSheet} />
+            </View>
+            <FiltersBottomSheet display={displayFiltersSheet} />
+        </>
+    )
 }
 
 export default Recipes
