@@ -9,10 +9,19 @@ class RecipesService {
     static getRecipes = (search: string): Promise<Recipe[]> => {
         const input = `${this.URL}?q=${search}&app_id=${this.ApiId}&app_key=${this.ApiKey}&type=public`
         return fetch(input)
-            .then(response => response.json())
             .then(response => {
-                const recipesFromApi = response.hits as RecipeApi[]
-                return recipesFromApi.map(recipeWrapper);
+                console.log("RESPONSE");
+                console.log(response)
+                return response.json()
+            })
+            .then(response => {
+                console.log(response);
+                if (response) {
+                    const recipesFromApi = response.hits as RecipeApi[]
+                    return recipesFromApi.map(recipeWrapper);
+                } else {
+                    return [];
+                }
             }).catch(error => {
                 console.log(error);
                 return [];

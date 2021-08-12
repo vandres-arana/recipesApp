@@ -1,8 +1,20 @@
 import { configureStore } from "@reduxjs/toolkit";
-import recipeSlice from "./recipeSlice";
+import errorHandler from "../middlewares/error-management";
+import logger from "../middlewares/logger";
+import recipeRecucer from "./recipeSlice";
+
+const middlewares = [
+    logger,
+    errorHandler,
+]
 
 const store = configureStore({
-    reducer: recipeSlice,
+    reducer: {
+        recipes: recipeRecucer
+    },
+    middleware: middlewares,
 });
+
+export type RootState = ReturnType<typeof store.getState>
 
 export default store;
