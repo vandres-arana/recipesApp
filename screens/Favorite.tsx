@@ -1,15 +1,25 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { useSelector } from 'react-redux'
-import { getFavorites } from '../store/recipeSlice'
+import { StyleSheet, View } from 'react-native'
+import { FavoriteRecipes } from '../components'
+import { COLORS } from '../styles'
+import { StackNavigationProp } from '@react-navigation/stack';
+import { Recipe } from '../models';
+import routes from '../navigation/routes';
 
-const Favorite: React.FC = () => {
-    const recipes = useSelector(getFavorites)
+type FavoriteProps = {
+    navigation: StackNavigationProp<any>,
+}
+
+const Favorite: React.FC<FavoriteProps> = ({
+    navigation,
+}) => {
+    const goToRecipeDetails = (recipe: Recipe) => {
+        navigation.push(routes.HOME.DETAIL, { recipe: recipe })
+    }
+
     return (
         <View style={styles.container}>
-            <Text>Favorite Recipes Screen</Text>
-            <Text>Under Construction!</Text>
-            <Text>{recipes.length}</Text>
+            <FavoriteRecipes goToRecipeDetails={goToRecipeDetails}/>
         </View>
     )
 }
@@ -19,7 +29,8 @@ export default Favorite
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
+        backgroundColor: COLORS.Color4,
     }
 })

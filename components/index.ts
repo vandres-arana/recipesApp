@@ -9,6 +9,8 @@ import CircularProgress from "./CircularProgress";
 import RecipeVideo from "./RecipeVideo";
 import FiltersBottomSheet from "./FiltersBottomSheet";
 import BottomFilterBar from "./BottomFilterBar";
+import FavoriteCard from "./FavoriteCard";
+import FavoriteRecipes from "./FavoriteRecipes";
 
 export {
     CustomSearchBar,
@@ -22,4 +24,6 @@ export {
     RecipeVideo,
     FiltersBottomSheet,
     BottomFilterBar,
+    FavoriteCard,
+    FavoriteRecipes,
 }
