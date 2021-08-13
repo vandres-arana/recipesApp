@@ -73,11 +73,16 @@ const recipeSlice = createSlice({
         markAsFavorite(state, action: PayloadAction<Recipe>) {
             const foundIndex = state.recipes.findIndex(recipe => recipe.title === action.payload.title);
             if (foundIndex < 0) {
+                const foundIndexFavorite = state.favorites.findIndex(recipe => recipe.title === action.payload.title);
+                if (foundIndexFavorite < 0) {
+                    return
+                }
+                state.favorites.splice(foundIndexFavorite, 1);
                 return
             }
             if (!state.recipes[foundIndex].isFavorite) {
                 state.recipes[foundIndex].isFavorite = true
-                state.favorites.push(action.payload);
+                state.favorites.push(state.recipes[foundIndex]);
             } else {
                 const foundIndexFavorite = state.favorites.findIndex(recipe => recipe.title === action.payload.title);
                 if (foundIndexFavorite < 0) {
@@ -104,6 +109,7 @@ const recipeSlice = createSlice({
             })
         });
         builder.addCase(loadRecipesFromApi.rejected, (state) => {
+            console.log("REJECTED")
             state.recipes = [];
         });
         builder.addCase(loadRecipesFromStorage.fulfilled, (state, action: PayloadAction<Recipe[]>) => {
