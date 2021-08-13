@@ -72,24 +72,19 @@ const recipeSlice = createSlice({
         },
         markAsFavorite(state, action: PayloadAction<Recipe>) {
             const foundIndex = state.recipes.findIndex(recipe => recipe.title === action.payload.title);
-            if (foundIndex < 0) {
-                const foundIndexFavorite = state.favorites.findIndex(recipe => recipe.title === action.payload.title);
-                if (foundIndexFavorite < 0) {
-                    return
+            const foundIndexFavorite = state.favorites.findIndex(recipe => recipe.title === action.payload.title);
+            if (foundIndex > -1) {
+                if (!state.recipes[foundIndex].isFavorite) {
+                    state.recipes[foundIndex].isFavorite = true
+                    state.favorites.push(state.recipes[foundIndex]);
+                } else {
+                    state.recipes[foundIndex].isFavorite = false
                 }
-                state.favorites.splice(foundIndexFavorite, 1);
-                return
             }
-            if (!state.recipes[foundIndex].isFavorite) {
-                state.recipes[foundIndex].isFavorite = true
-                state.favorites.push(state.recipes[foundIndex]);
-            } else {
-                const foundIndexFavorite = state.favorites.findIndex(recipe => recipe.title === action.payload.title);
-                if (foundIndexFavorite < 0) {
-                    return
+            if (foundIndexFavorite > -1) {
+                if (state.favorites[foundIndexFavorite].isFavorite) {
+                    state.favorites.splice(foundIndexFavorite, 1);
                 }
-                state.recipes[foundIndex].isFavorite = false;
-                state.favorites.splice(foundIndexFavorite, 1);
             }
             RecipesStorage.saveRecipes(state.favorites);
         },
