@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import BottomSheet from 'reanimated-bottom-sheet';
 import { CUISINEFILTERS, DIETFILTERS, DISHFILTERS, HEALTHFILTERS, MEALFILTERS } from '../static';
 import { RootState } from '../store';
-import { displayBottomSheet, loadRecipesFromApi } from '../store/recipeSlice';
+import { displayBottomSheet, loadRecipesFromApi, resetStoreFilters } from '../store/recipeSlice';
 import { COLORS } from '../styles';
 import BottomFilterBar from './BottomFilterBar';
 
@@ -15,6 +15,7 @@ const FiltersBottomSheet: React.FC = () => {
     const currentSearch = useSelector((state: RootState) => state.recipes.currentSearch.title)
     const filters = useSelector((state: RootState) => state.recipes.advancedFilters)
     const resetFilters = () => {
+        dispatch(resetStoreFilters())
     }
 
     const closeModal = () => {

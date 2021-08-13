@@ -50,8 +50,14 @@ const recipeSlice = createSlice({
         setAdvancedFilter(state, action: PayloadAction<AdvancedFilter>) {
             state.advancedFilters[action.payload.filterGroup] = action.payload.filter
         },
-        resetFilters(state) {
-            state.currentSearch = FILTERS[0]
+        resetStoreFilters(state) {
+            state.advancedFilters = [
+                initialFilter,
+                initialFilter,
+                initialFilter,
+                initialFilter,
+                initialFilter,
+            ]
         },
         markAsFavorite(state, action: PayloadAction<string>) {
             const foundIndex = state.recipes.findIndex(recipe => recipe.title === action.payload)
@@ -71,6 +77,6 @@ const recipeSlice = createSlice({
     }
 });
 
-export const { loadRecipes, updateSearch, displayBottomSheet, setAdvancedFilter } = recipeSlice.actions;
+export const { loadRecipes, updateSearch, displayBottomSheet, setAdvancedFilter, resetStoreFilters } = recipeSlice.actions;
 
 export default recipeSlice.reducer;
