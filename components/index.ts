@@ -11,6 +11,7 @@ import FiltersBottomSheet from "./FiltersBottomSheet";
 import BottomFilterBar from "./BottomFilterBar";
 import FavoriteCard from "./FavoriteCard";
 import FavoriteRecipes from "./FavoriteRecipes";
+import EmptyCarousel from "./EmptyCarousel";
 
 export {
     CustomSearchBar,
@@ -26,4 +27,5 @@ export {
     BottomFilterBar,
     FavoriteCard,
     FavoriteRecipes,
+    EmptyCarousel,
 }

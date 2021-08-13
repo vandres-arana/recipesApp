@@ -5,6 +5,7 @@ import Carousel from 'react-native-snap-carousel';
 import { Recipe } from '../models';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentSearch, getFilters, getRecipes, loadRecipesFromApi, loadRecipesFromStorage } from '../store/recipeSlice';
+import EmptyCarousel from './EmptyCarousel';
 
 type RecipeCarouselProps = {
     goToRecipeDetails: (recipe: Recipe) => void,
@@ -39,6 +40,7 @@ const RecipeCarousel: React.FC<RecipeCarouselProps> = ({
                 itemWidth={Dimensions.get('window').width * 0.80}
                 contentContainerCustomStyle={styles.carousel}
                 initialNumToRender={7}
+                ListEmptyComponent={EmptyCarousel}
             />
         </View>
     )
