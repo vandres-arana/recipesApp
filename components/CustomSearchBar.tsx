@@ -3,12 +3,11 @@ import { Dimensions, StyleSheet, TextInput, View } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import { COLORS } from '../styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadRecipesFromApi, updateSearch } from '../store/recipeSlice';
-import { RootState } from '../store';
+import { getFilters, loadRecipesFromApi, updateSearch } from '../store/recipeSlice';
 
 const CustomSearchBar: React.FC = () => {
     const dispatch = useDispatch();
-    const filters = useSelector((state: RootState) => state.recipes.advancedFilters)
+    const filters = useSelector(getFilters)
 
     const [searchRecipe, setSearchRecipe] = useState('');
 
@@ -19,12 +18,13 @@ const CustomSearchBar: React.FC = () => {
     const submitSearch = () => {
         dispatch(updateSearch({
             id: -1,
-            title: searchRecipe
+            title: searchRecipe,
         }))
         dispatch(loadRecipesFromApi({
             search: searchRecipe,
-            filters
+            filters,
         }));
+        setSearchRecipe('');
     }
 
     return (

@@ -4,16 +4,15 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 import BottomSheet from 'reanimated-bottom-sheet';
 import { CUISINEFILTERS, DIETFILTERS, DISHFILTERS, HEALTHFILTERS, MEALFILTERS } from '../static';
-import { RootState } from '../store';
-import { displayBottomSheet, loadRecipesFromApi, resetStoreFilters } from '../store/recipeSlice';
+import { displayBottomSheet, getCurrentSearch, getDisplayBottomSheet, getFilters, loadRecipesFromApi, resetStoreFilters } from '../store/recipeSlice';
 import { COLORS } from '../styles';
 import BottomFilterBar from './BottomFilterBar';
 
 const FiltersBottomSheet: React.FC = () => {
     const dispatch = useDispatch()
-    const display = useSelector((state: RootState) => state.recipes.displayBottomSheet)
-    const currentSearch = useSelector((state: RootState) => state.recipes.currentSearch.title)
-    const filters = useSelector((state: RootState) => state.recipes.advancedFilters)
+    const display = useSelector(getDisplayBottomSheet)
+    const currentSearch = useSelector(getCurrentSearch)
+    const filters = useSelector(getFilters)
     const resetFilters = () => {
         dispatch(resetStoreFilters())
     }
@@ -28,7 +27,7 @@ const FiltersBottomSheet: React.FC = () => {
         }
         dispatch(loadRecipesFromApi({
             search: currentSearch,
-            filters
+            filters,
         }))
     }
 

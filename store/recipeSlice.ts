@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { RootState } from '.';
 import { AdvancedFilter, FilterData, Recipe, SearchFilters } from '../models'
 import RecipesService from '../services/RecipesService';
 import { FILTERS } from '../static';
@@ -80,3 +81,13 @@ const recipeSlice = createSlice({
 export const { loadRecipes, updateSearch, displayBottomSheet, setAdvancedFilter, resetStoreFilters } = recipeSlice.actions;
 
 export default recipeSlice.reducer;
+
+export const getRecipes = (state: RootState) => state.recipes.recipes;
+
+export const getCurrentSearch = (state: RootState) => state.recipes.currentSearch.title;
+
+export const getDisplayBottomSheet = (state: RootState) => state.recipes.displayBottomSheet;
+
+export const getFilters = (state: RootState) => state.recipes.advancedFilters;
+
+export const getSearchId = (state: RootState) => state.recipes.currentSearch.id

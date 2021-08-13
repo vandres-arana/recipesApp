@@ -4,8 +4,7 @@ import RecipeCard from './RecipeCard';
 import Carousel from 'react-native-snap-carousel';
 import { Recipe } from '../models';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadRecipesFromApi } from '../store/recipeSlice';
-import { RootState } from '../store';
+import { getCurrentSearch, getFilters, getRecipes, loadRecipesFromApi } from '../store/recipeSlice';
 
 type RecipeCarouselProps = {
     goToRecipeDetails: (recipe: Recipe) => void,
@@ -15,9 +14,9 @@ const RecipeCarousel: React.FC<RecipeCarouselProps> = ({
     goToRecipeDetails,
 }) => {
     const dispatch = useDispatch()
-    const recipeList = useSelector((state: RootState) => state.recipes.recipes)
-    const currentSearch = useSelector((state: RootState) => state.recipes.currentSearch.title)
-    const filters = useSelector((state: RootState) => state.recipes.advancedFilters)
+    const recipeList = useSelector(getRecipes)
+    const currentSearch = useSelector(getCurrentSearch)
+    const filters = useSelector(getFilters)
 
     const CarouselItem = (props: any) => {
         return <RecipeCard goToRecipeDetails={goToRecipeDetails} item={props.item} />
@@ -26,7 +25,7 @@ const RecipeCarousel: React.FC<RecipeCarouselProps> = ({
     useEffect(() => {
         dispatch(loadRecipesFromApi({
             search: currentSearch,
-            filters
+            filters,
         }));
     }, []);
 

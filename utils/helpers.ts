@@ -5,7 +5,6 @@ class Helpers {
 
     static constructQueryParams(values: FilterData[]): string {
         var query = ''
-        console.log(values)
         if (values[0].id > -1) {
             query += `&diet=${DIETFILTERS[values[0].id].title}`
         }

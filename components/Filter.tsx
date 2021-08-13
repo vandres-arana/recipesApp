@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { FilterData } from '../models'
 import { RootState } from '../store'
-import { loadRecipesFromApi, updateSearch } from '../store/recipeSlice'
+import { getFilters, loadRecipesFromApi, updateSearch } from '../store/recipeSlice'
 import { COLORS } from '../styles'
 
 type FilterProps = {
@@ -16,7 +16,7 @@ const Filter: React.FC<FilterProps> = ({
     isSelected,
 }) => {
     const dispatch = useDispatch()
-    const filters = useSelector((state: RootState) => state.recipes.advancedFilters)
+    const filters = useSelector(getFilters)
     const pressFilter = () => {
         dispatch(updateSearch(item))
         dispatch(loadRecipesFromApi({

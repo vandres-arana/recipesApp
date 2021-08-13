@@ -5,13 +5,12 @@ import Filter from './Filter'
 import { Octicons } from '@expo/vector-icons';
 import { COLORS } from '../styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store';
-import { displayBottomSheet } from '../store/recipeSlice';
+import { displayBottomSheet, getSearchId } from '../store/recipeSlice';
 
 const FiltersBar: React.FC = () => {
     const filters = FILTERS;
     const dispatch = useDispatch()
-    const selectedFilter = useSelector((state: RootState) => state.recipes.currentSearch.id)
+    const selectedFilter = useSelector(getSearchId)
     const FilterItem = (props: any) => {
         return <Filter item={props.item} isSelected={props.item.id === selectedFilter} />
     }

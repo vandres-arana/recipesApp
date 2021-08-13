@@ -7,12 +7,8 @@ class RecipesService {
     static ApiKey = '3a3fa1c3a45e684ec05b93ac52328f1c';
 
     static getRecipes = (searchFilters: SearchFilters): Promise<Recipe[]> => {
-        console.log("EN")
-        console.log(searchFilters)
-        const query = Helpers.constructQueryParams(searchFilters.filters)
-        console.log("ON")
-        const input = `${this.URL}?q=${searchFilters.search}&app_id=${this.ApiId}&app_key=${this.ApiKey}&type=public${query}`
-        console.log(input)
+        const query = Helpers.constructQueryParams(searchFilters.filters);
+        const input = `${this.URL}?q=${searchFilters.search}&app_id=${this.ApiId}&app_key=${this.ApiKey}&type=public${query}`;
         return fetch(input)
             .then(response => {
                 return response.json()
