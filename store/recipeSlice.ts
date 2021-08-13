@@ -72,15 +72,18 @@ const recipeSlice = createSlice({
         },
         markAsFavorite(state, action: PayloadAction<Recipe>) {
             const foundIndex = state.recipes.findIndex(recipe => recipe.title === action.payload.title);
-            const foundIndexFavorite = state.favorites.findIndex(recipe => recipe.title === action.payload.title);
-            if (foundIndex < 0 || foundIndexFavorite < 0) {
+            if (foundIndex < 0) {
                 return
             }
             if (!state.recipes[foundIndex].isFavorite) {
                 state.recipes[foundIndex].isFavorite = true
                 state.favorites.push(action.payload);
             } else {
-                state.recipes[foundIndex].isFavorite = false
+                const foundIndexFavorite = state.favorites.findIndex(recipe => recipe.title === action.payload.title);
+                if (foundIndexFavorite < 0) {
+                    return
+                }
+                state.recipes[foundIndex].isFavorite = false;
                 state.favorites.splice(foundIndexFavorite, 1);
             }
             RecipesStorage.saveRecipes(state.favorites);
@@ -105,7 +108,10 @@ const recipeSlice = createSlice({
         });
         builder.addCase(loadRecipesFromStorage.fulfilled, (state, action: PayloadAction<Recipe[]>) => {
             state.loading = false;
-            state.favorites = action.payload;
+            state.favorites = action.payload.map((recipe) => {
+                recipe.isFavorite = true
+                return recipe
+            });
         });
         builder.addCase(loadRecipesFromStorage.rejected, (state) => {
             state.favorites = [];

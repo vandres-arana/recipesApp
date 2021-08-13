@@ -29,6 +29,7 @@ const FavoriteRecipes: React.FC<FavoriteRecipesProps> = ({
                 data={favoriteRecipes}
                 renderItem={FilterItem}
                 keyExtractor={keyExtractor}
+                showsVerticalScrollIndicator={false}
             />
         </View>
     )

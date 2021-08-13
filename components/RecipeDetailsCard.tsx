@@ -11,6 +11,9 @@ import { AntDesign } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { COLORS } from '../styles';
 import { Recipe } from '../models';
+import { markAsFavorite } from '../store/recipeSlice';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 
 type RecipeDetailsCardProps = {
     recipe: Recipe,
@@ -21,6 +24,12 @@ const RecipeDetailsCard: React.FC<RecipeDetailsCardProps> = ({
     recipe,
     returnToPreviousScreen,
 }) => {
+    const dispatch = useDispatch();
+    const [isFavorite, setIsFavorite] = useState(recipe.isFavorite);
+    const markRecipeAsFavorite = () => {
+        setIsFavorite(!isFavorite);
+        dispatch(markAsFavorite(recipe))
+    }
     return (
         <ImageBackground source={{ uri: recipe.image }}
             style={styles.image}>
@@ -32,8 +41,10 @@ const RecipeDetailsCard: React.FC<RecipeDetailsCardProps> = ({
                         <AntDesign name="left" size={30} color={COLORS.White} />
                     </TouchableOpacity>
                     <View style={styles.topRightContainer}>
-                        <TouchableOpacity style={styles.iconContainer}>
-                            <MaterialCommunityIcons name={recipe.isFavorite ? "heart" : "heart-outline"} size={30} color={COLORS.White} />
+                        <TouchableOpacity
+                            style={styles.iconContainer}
+                            onPress={markRecipeAsFavorite}>
+                            <MaterialCommunityIcons name={isFavorite ? "heart" : "heart-outline"} size={30} color={COLORS.White} />
                             <Text style={styles.topLabel}>{recipe.likes}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.iconContainer}>
