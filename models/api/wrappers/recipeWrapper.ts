@@ -13,6 +13,7 @@ const recipeWrapper = (recipe: RecipeApi): Recipe => ({
     ingredients: recipe.recipe.ingredients,
     calories: recipe.recipe.calories,
     nutritionInformation: recipe.recipe.digest,
+    isFavorite: false,
 })
 
 export default recipeWrapper

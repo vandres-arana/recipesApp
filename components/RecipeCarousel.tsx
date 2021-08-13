@@ -23,11 +23,11 @@ const RecipeCarousel: React.FC<RecipeCarouselProps> = ({
     }
 
     useEffect(() => {
+        dispatch(loadRecipesFromStorage());
         dispatch(loadRecipesFromApi({
             search: currentSearch,
             filters,
         }));
-        dispatch(loadRecipesFromStorage());
     }, []);
 
     return (

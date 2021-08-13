@@ -82,14 +82,19 @@ const recipeSlice = createSlice({
         });
         builder.addCase(loadRecipesFromApi.fulfilled, (state, action: PayloadAction<Recipe[]>) => {
             state.loading = false;
-            state.recipes = action.payload;
+            state.recipes = action.payload.map((recipe) => {
+                const foundIndex = state.favorites.findIndex(favoriteRecipe => favoriteRecipe.title == recipe.title);
+                if (foundIndex > -1) {
+                    recipe.isFavorite = true
+                }
+                return recipe
+            })
         });
         builder.addCase(loadRecipesFromApi.rejected, (state) => {
             state.recipes = [];
         });
         builder.addCase(loadRecipesFromStorage.fulfilled, (state, action: PayloadAction<Recipe[]>) => {
             state.loading = false;
-            console.log("GOT")
             state.favorites = action.payload;
         });
         builder.addCase(loadRecipesFromStorage.rejected, (state) => {

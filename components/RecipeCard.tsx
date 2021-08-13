@@ -37,7 +37,7 @@ const RecipeCard: React.FC<RecipeProps> = ({
                         <TouchableOpacity
                             style={styles.iconContainer}
                             onPress={markRecipeAsFavorite}>
-                            <MaterialCommunityIcons name="heart-outline" size={30} color={COLORS.White} />
+                            <MaterialCommunityIcons name={item.isFavorite ? "heart" : "heart-outline"} size={30} color={COLORS.White} />
                             <Text style={styles.topLabel}>{item.likes}</Text>
                         </TouchableOpacity>
                         <View style={styles.iconContainer}>

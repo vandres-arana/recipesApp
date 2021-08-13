@@ -13,4 +13,5 @@ export default interface Recipe {
     nutritionInformation: Digest[];
     calories: number;
     time: string;
+    isFavorite: boolean;
 }
