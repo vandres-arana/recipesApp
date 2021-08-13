@@ -19,6 +19,7 @@ const RecipeVideo: React.FC<RecipeVideoProps> = ({
                 height={220}
                 play={true}
                 videoId={url}
+                webViewStyle={ {opacity:0.99} }
             />
         </View>
     )
