@@ -1,4 +1,4 @@
-import { Recipe, RecipeApi, recipeWrapper } from "../models";
+import { Recipe, RecipeApi, recipeWrapper, SearchFilters } from "../models";
 import { Helpers } from "../utils";
 
 class RecipesService {
@@ -6,8 +6,13 @@ class RecipesService {
     static ApiId = '9c81aebf';
     static ApiKey = '3a3fa1c3a45e684ec05b93ac52328f1c';
 
-    static getRecipes = (search: string): Promise<Recipe[]> => {
-        const input = `${this.URL}?q=${search}&app_id=${this.ApiId}&app_key=${this.ApiKey}&type=public`
+    static getRecipes = (searchFilters: SearchFilters): Promise<Recipe[]> => {
+        console.log("EN")
+        console.log(searchFilters)
+        const query = Helpers.constructQueryParams(searchFilters.filters)
+        console.log("ON")
+        const input = `${this.URL}?q=${searchFilters.search}&app_id=${this.ApiId}&app_key=${this.ApiKey}&type=public${query}`
+        console.log(input)
         return fetch(input)
             .then(response => {
                 return response.json()
@@ -32,20 +37,6 @@ class RecipesService {
             .then(response => {
                 const recipeFromApi = response as RecipeApi
                 return recipeWrapper(recipeFromApi);
-            })
-    }
-
-    static getRecipesWithValues = (search: string, values: number[]): Promise<Recipe[]> => {
-        const query = Helpers.constructQueryParams(values)
-        var input = `${this.URL}?q=${search}&app_id=${this.ApiId}&app_key=${this.ApiKey}&type=public${query}`
-        return fetch(input)
-            .then(response => response.json())
-            .then(response => {
-                const recipesFromApi = response.hits as RecipeApi[]
-                return recipesFromApi.map(recipeWrapper);
-            }).catch(error => {
-                console.log(error);
-                return [];
             })
     }
 }

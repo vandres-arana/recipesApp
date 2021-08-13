@@ -1,7 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { FilterData } from '../models'
+import { RootState } from '../store'
 import { loadRecipesFromApi, updateSearch } from '../store/recipeSlice'
 import { COLORS } from '../styles'
 
@@ -15,9 +16,13 @@ const Filter: React.FC<FilterProps> = ({
     isSelected,
 }) => {
     const dispatch = useDispatch()
+    const filters = useSelector((state: RootState) => state.recipes.advancedFilters)
     const pressFilter = () => {
         dispatch(updateSearch(item))
-        dispatch(loadRecipesFromApi(item.title))
+        dispatch(loadRecipesFromApi({
+            search: item.title,
+            filters,
+        }))
     }
 
     return (

@@ -17,13 +17,17 @@ const RecipeCarousel: React.FC<RecipeCarouselProps> = ({
     const dispatch = useDispatch()
     const recipeList = useSelector((state: RootState) => state.recipes.recipes)
     const currentSearch = useSelector((state: RootState) => state.recipes.currentSearch.title)
+    const filters = useSelector((state: RootState) => state.recipes.advancedFilters)
 
     const CarouselItem = (props: any) => {
         return <RecipeCard goToRecipeDetails={goToRecipeDetails} item={props.item} />
     }
 
     useEffect(() => {
-        dispatch(loadRecipesFromApi(currentSearch));
+        dispatch(loadRecipesFromApi({
+            search: currentSearch,
+            filters
+        }));
     }, []);
 
     return (
@@ -38,6 +42,7 @@ const RecipeCarousel: React.FC<RecipeCarouselProps> = ({
             />
         </View>
     )
+
 }
 
 export default RecipeCarousel

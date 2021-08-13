@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { AdvancedFilter, FilterData, Recipe } from '../models'
+import { AdvancedFilter, FilterData, Recipe, SearchFilters } from '../models'
 import RecipesService from '../services/RecipesService';
 import { FILTERS } from '../static';
 
-export const loadRecipesFromApi = createAsyncThunk('recipes/loadRecipes', (search: string) => {
-    return RecipesService.getRecipes(search);
+export const loadRecipesFromApi = createAsyncThunk('recipes/loadRecipes', (searchFilters: SearchFilters) => {
+    return RecipesService.getRecipes(searchFilters);
 });
 
 type InitialStateProps = {
