@@ -5,7 +5,7 @@ import { COLORS } from '../styles'
 const EmptyCarousel: React.FC = () => {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>No recipe available</Text>
+            <Text style={styles.title}>No recipe found!</Text>
         </View>
     )
 }
