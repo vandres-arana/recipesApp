@@ -1,23 +1,27 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { useDispatch } from 'react-redux'
 import { FilterData } from '../models'
+import { setAdvancedFilter } from '../store/recipeSlice'
 import { COLORS } from '../styles'
 
 type BottomFilterProps = {
     filterbarId: number,
     item: FilterData,
     isSelected: boolean,
-    selectFilter: (id: number, index: number) => void
 }
 
 const BottomFilter: React.FC<BottomFilterProps> = ({
     item,
     isSelected,
-    selectFilter,
     filterbarId
 }) => {
+    const dispatch = useDispatch()
     const pressFilter = () => {
-        selectFilter(filterbarId, item.id)
+        dispatch(setAdvancedFilter({
+            filterGroup: filterbarId,
+            filter: item,
+        }))
     }
     return (
         <TouchableOpacity style={[styles.container, { backgroundColor: isSelected ? COLORS.Color2 : COLORS.Color3 }]}

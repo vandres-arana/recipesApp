@@ -1,24 +1,23 @@
 import React from 'react'
 import { StyleSheet, FlatList, View } from 'react-native'
+import { useSelector } from 'react-redux'
 import { FilterData } from '../models'
+import { RootState } from '../store'
 import { COLORS } from '../styles'
 import BottomFilter from './BottomFilter'
 
 type BottomFilterBarProps = {
     barId: number,
-    selectedFilter: number,
-    selectFilter: (id: number, index: number) => void,
     filters: FilterData[],
 }
 
 const BottomFilterBar: React.FC<BottomFilterBarProps> = ({
-    selectedFilter,
-    selectFilter,
     filters,
     barId,
 }) => {
+    const selectedFilter = useSelector((state: RootState) => state.recipes.advancedFilters[barId].id)
     const FilterItem = (props: any) => {
-        return <BottomFilter filterbarId={barId} item={props.item} isSelected={props.item.id === selectedFilter} selectFilter={selectFilter} />
+        return <BottomFilter filterbarId={barId} item={props.item} isSelected={props.item.id === selectedFilter} />
     }
 
     const keyExtractor = (item: any, index: number) => {

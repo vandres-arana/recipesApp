@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { FilterData, Recipe } from '../models'
+import { AdvancedFilter, FilterData, Recipe } from '../models'
 import RecipesService from '../services/RecipesService';
 import { FILTERS } from '../static';
 
@@ -12,11 +12,12 @@ type InitialStateProps = {
     recipes: Recipe[],
     currentSearch: FilterData,
     displayBottomSheet: boolean,
-    dietType: string,
-    healthType: string,
-    mealType: string,
-    dishType: string,
-    counter: number,
+    advancedFilters: FilterData[],
+}
+
+const initialFilter: FilterData = {
+    id: -1,
+    title: ''
 }
 
 const initialState: InitialStateProps = {
@@ -24,11 +25,13 @@ const initialState: InitialStateProps = {
     recipes: [],
     currentSearch: FILTERS[0],
     displayBottomSheet: false,
-    dietType: '',
-    healthType: '',
-    mealType: '',
-    dishType: '',
-    counter: 100,
+    advancedFilters: [
+        initialFilter,
+        initialFilter,
+        initialFilter,
+        initialFilter,
+        initialFilter,
+    ]
 }
 
 const recipeSlice = createSlice({
@@ -41,15 +44,18 @@ const recipeSlice = createSlice({
         updateSearch(state, action: PayloadAction<FilterData>) {
             state.currentSearch = action.payload
         },
-        markAsFavorite(state, action: PayloadAction<string>) {
-            const foundIndex = state.recipes.findIndex(recipe => recipe.title === action.payload)
-        },
         displayBottomSheet(state, action: PayloadAction<boolean>) {
             state.displayBottomSheet = action.payload
         },
+        setAdvancedFilter(state, action: PayloadAction<AdvancedFilter>) {
+            state.advancedFilters[action.payload.filterGroup] = action.payload.filter
+        },
         resetFilters(state) {
             state.currentSearch = FILTERS[0]
-        }
+        },
+        markAsFavorite(state, action: PayloadAction<string>) {
+            const foundIndex = state.recipes.findIndex(recipe => recipe.title === action.payload)
+        },
     },
     extraReducers: builder => {
         builder.addCase(loadRecipesFromApi.pending, (state) => {
@@ -65,6 +71,6 @@ const recipeSlice = createSlice({
     }
 });
 
-export const { loadRecipes, updateSearch, displayBottomSheet } = recipeSlice.actions;
+export const { loadRecipes, updateSearch, displayBottomSheet, setAdvancedFilter } = recipeSlice.actions;
 
 export default recipeSlice.reducer;

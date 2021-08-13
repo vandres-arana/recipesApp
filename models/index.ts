@@ -4,6 +4,7 @@ import recipeWrapper from "./api/wrappers/recipeWrapper";
 import FilterData from "./filterData";
 import Ingredient from "./ingredient";
 import Digest from "./digest";
+import AdvancedFilter from "./advancedFilter";
 
 export {
     Recipe,
@@ -12,4 +13,5 @@ export {
     recipeWrapper,
     Ingredient,
     Digest,
+    AdvancedFilter,
 }

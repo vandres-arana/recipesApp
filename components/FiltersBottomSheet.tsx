@@ -12,38 +12,9 @@ import BottomFilterBar from './BottomFilterBar';
 const FiltersBottomSheet: React.FC = () => {
     const dispatch = useDispatch()
     const display = useSelector((state: RootState) => state.recipes.displayBottomSheet)
-    const [dietSelectedFilter, setDietSelectedFilter] = useState(-1);
-    const [healthSelectedFilter, sethealthSelectedFilter] = useState(-1);
-    const [cuisineSelectedFilter, setcuisineSelectedFilter] = useState(-1);
-    const [mealSelectedFilter, setmealSelectedFilter] = useState(-1);
-    const [dishSlectedFilter, setdishSlectedFilter] = useState(-1);
-
-    const selectFilter = (barId: number, index: number) => {
-        switch (barId) {
-            case 0:
-                setDietSelectedFilter(index);
-                break;
-            case 1:
-                sethealthSelectedFilter(index);
-                break;
-            case 2:
-                setcuisineSelectedFilter(index);
-                break;
-            case 3:
-                setmealSelectedFilter(index);
-                break;
-            case 4:
-                setdishSlectedFilter(index);
-                break;
-        }
-    }
 
     const resetFilters = () => {
-        setDietSelectedFilter(-1);
-        sethealthSelectedFilter(-1);
-        setcuisineSelectedFilter(-1);
-        setmealSelectedFilter(-1);
-        setdishSlectedFilter(-1);
+        
     }
 
     const closeModal = () => {
@@ -65,7 +36,7 @@ const FiltersBottomSheet: React.FC = () => {
                     <TouchableOpacity onPress={resetFilters}>
                         <Text style={styles.button}>Reset</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={closeModal}>
+                    <TouchableOpacity onPress={applyFilters}>
                         <Text style={styles.button}>Go!</Text>
                     </TouchableOpacity>
                 </View>
@@ -73,23 +44,23 @@ const FiltersBottomSheet: React.FC = () => {
             <ScrollView>
                 <View style={styles.filterContainer}>
                     <Text style={styles.subtitle}>Diet type</Text>
-                    <BottomFilterBar barId={0} filters={DIETFILTERS} selectFilter={selectFilter} selectedFilter={dietSelectedFilter} />
+                    <BottomFilterBar barId={0} filters={DIETFILTERS} />
                 </View>
                 <View style={styles.filterContainer}>
                     <Text style={styles.subtitle}>Health</Text>
-                    <BottomFilterBar barId={1} filters={HEALTHFILTERS} selectFilter={selectFilter} selectedFilter={healthSelectedFilter} />
+                    <BottomFilterBar barId={1} filters={HEALTHFILTERS} />
                 </View>
                 <View style={styles.filterContainer}>
                     <Text style={styles.subtitle}>Cuisine Type</Text>
-                    <BottomFilterBar barId={2} filters={CUISINEFILTERS} selectFilter={selectFilter} selectedFilter={cuisineSelectedFilter} />
+                    <BottomFilterBar barId={2} filters={CUISINEFILTERS} />
                 </View>
                 <View style={styles.filterContainer}>
                     <Text style={styles.subtitle}>Meal Type</Text>
-                    <BottomFilterBar barId={3} filters={MEALFILTERS} selectFilter={selectFilter} selectedFilter={mealSelectedFilter} />
+                    <BottomFilterBar barId={3} filters={MEALFILTERS} />
                 </View>
                 <View style={styles.filterContainer}>
                     <Text style={styles.subtitle}>Dish Type</Text>
-                    <BottomFilterBar barId={4} filters={DISHFILTERS} selectFilter={selectFilter} selectedFilter={dishSlectedFilter} />
+                    <BottomFilterBar barId={4} filters={DISHFILTERS} />
                 </View>
             </ScrollView>
         </View>
