@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native'
+import React from 'react'
+import { StyleSheet, Text, View, Dimensions, Platform, TouchableOpacity as TouchableOpacityiOS } from 'react-native'
+import { TouchableOpacity as TouchableOpacityAndroid } from 'react-native-gesture-handler'
 import { ScrollView } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 import BottomSheet from 'reanimated-bottom-sheet';
@@ -36,12 +37,25 @@ const FiltersBottomSheet: React.FC = () => {
             <View style={styles.topContainer}>
                 <Text style={styles.title}>Filters</Text>
                 <View style={styles.topButtons}>
-                    <TouchableOpacity onPress={resetFilters}>
-                        <Text style={styles.button}>Reset</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={applyFilters}>
-                        <Text style={styles.button}>Go!</Text>
-                    </TouchableOpacity>
+                    {Platform.OS === 'ios' ?
+                        <>
+                            <TouchableOpacityiOS onPress={resetFilters}>
+                                <Text style={styles.button}>Reset</Text>
+                            </TouchableOpacityiOS>
+                            <TouchableOpacityiOS onPress={applyFilters}>
+                                <Text style={styles.button}>Go!</Text>
+                            </TouchableOpacityiOS>
+                        </>
+                        :
+                        <>
+                            <TouchableOpacityAndroid onPress={resetFilters}>
+                                <Text style={styles.button}>Reset</Text>
+                            </TouchableOpacityAndroid>
+                            <TouchableOpacityAndroid onPress={applyFilters}>
+                                <Text style={styles.button}>Go!</Text>
+                            </TouchableOpacityAndroid>
+                        </>
+                    }
                 </View>
             </View>
             <ScrollView>
@@ -88,6 +102,7 @@ const FiltersBottomSheet: React.FC = () => {
             borderRadius={10}
             renderContent={renderContent}
             onCloseEnd={closeModal}
+        // enabledContentGestureInteraction={false}
         />
     )
 }

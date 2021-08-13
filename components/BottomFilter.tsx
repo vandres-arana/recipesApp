@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, Platform, TouchableOpacity as TouchableOpacityiOS } from 'react-native'
+import { TouchableOpacity as TouchableOpacityAndroid } from 'react-native-gesture-handler'
 import { useDispatch } from 'react-redux'
 import { FilterData } from '../models'
 import { setAdvancedFilter } from '../store/recipeSlice'
@@ -24,10 +25,20 @@ const BottomFilter: React.FC<BottomFilterProps> = ({
         }))
     }
     return (
-        <TouchableOpacity style={[styles.container, { backgroundColor: isSelected ? COLORS.Color2 : COLORS.Color3 }]}
-            onPress={pressFilter}>
-            <Text style={styles.label}>{item.title}</Text>
-        </TouchableOpacity>
+        <>
+            {
+                Platform.OS === 'ios' ?
+                    < TouchableOpacityiOS style={[styles.container, { backgroundColor: isSelected ? COLORS.Color2 : COLORS.Color3 }]}
+                        onPress={pressFilter} >
+                        <Text style={styles.label}>{item.title}</Text>
+                    </TouchableOpacityiOS >
+                    :
+                    < TouchableOpacityAndroid style={[styles.container, { backgroundColor: isSelected ? COLORS.Color2 : COLORS.Color3 }]}
+                        onPress={pressFilter} >
+                        <Text style={styles.label}>{item.title}</Text>
+                    </TouchableOpacityAndroid >
+            }
+        </>
     )
 }
 

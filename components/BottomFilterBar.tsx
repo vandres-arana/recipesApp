@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyleSheet, FlatList, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
+import { FlatList } from 'react-native-gesture-handler'
 import { useSelector } from 'react-redux'
 import { FilterData } from '../models'
 import { RootState } from '../store'
