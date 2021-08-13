@@ -71,9 +71,19 @@ const recipeSlice = createSlice({
             ];
         },
         markAsFavorite(state, action: PayloadAction<Recipe>) {
-            // const foundIndex = state.recipes.findIndex(recipe => recipe.title === action.payload);
-            state.favorites.push(action.payload)
-            RecipesStorage.saveRecipes(state.favorites)
+            const foundIndex = state.recipes.findIndex(recipe => recipe.title === action.payload.title);
+            const foundIndexFavorite = state.favorites.findIndex(recipe => recipe.title === action.payload.title);
+            if (foundIndex < 0 || foundIndexFavorite < 0) {
+                return
+            }
+            if (!state.recipes[foundIndex].isFavorite) {
+                state.recipes[foundIndex].isFavorite = true
+                state.favorites.push(action.payload);
+            } else {
+                state.recipes[foundIndex].isFavorite = false
+                state.favorites.splice(foundIndexFavorite, 1);
+            }
+            RecipesStorage.saveRecipes(state.favorites);
         },
     },
     extraReducers: builder => {
