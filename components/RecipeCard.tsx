@@ -10,6 +10,8 @@ import { Card } from 'react-native-elements';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Recipe } from '../models';
 import { COLORS } from '../styles';
+import { useDispatch } from 'react-redux';
+import { markAsFavorite } from '../store/recipeSlice';
 
 type RecipeProps = {
     goToRecipeDetails: (recipe: Recipe) => void,
@@ -20,6 +22,10 @@ const RecipeCard: React.FC<RecipeProps> = ({
     goToRecipeDetails,
     item
 }) => {
+    const dispatch = useDispatch()
+    const markRecipeAsFavorite = () => {
+        dispatch(markAsFavorite(item))
+    }
     return (
         <Card containerStyle={styles.card}>
             <Card.Image
@@ -28,7 +34,9 @@ const RecipeCard: React.FC<RecipeProps> = ({
                 onPress={() => goToRecipeDetails(item)}>
                 <View style={styles.imageContainer}>
                     <View style={styles.topContainer}>
-                        <TouchableOpacity style={styles.iconContainer}>
+                        <TouchableOpacity
+                            style={styles.iconContainer}
+                            onPress={markRecipeAsFavorite}>
                             <MaterialCommunityIcons name="heart-outline" size={30} color={COLORS.White} />
                             <Text style={styles.topLabel}>{item.likes}</Text>
                         </TouchableOpacity>

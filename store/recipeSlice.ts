@@ -2,15 +2,21 @@ import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '.';
 import { AdvancedFilter, FilterData, Recipe, SearchFilters } from '../models'
 import RecipesService from '../services/RecipesService';
+import RecipesStorage from '../services/RecipesStorage';
 import { FILTERS } from '../static';
 
 export const loadRecipesFromApi = createAsyncThunk('recipes/loadRecipes', (searchFilters: SearchFilters) => {
     return RecipesService.getRecipes(searchFilters);
 });
 
+export const loadRecipesFromStorage = createAsyncThunk('recipes/loadRecipesFromStorage', () => {
+    return RecipesStorage.getRecipes()
+});
+
 type InitialStateProps = {
     loading: boolean,
     recipes: Recipe[],
+    favorites: Recipe[],
     currentSearch: FilterData,
     displayBottomSheet: boolean,
     advancedFilters: FilterData[],
@@ -24,6 +30,7 @@ const initialFilter: FilterData = {
 const initialState: InitialStateProps = {
     loading: false,
     recipes: [],
+    favorites: [],
     currentSearch: FILTERS[0],
     displayBottomSheet: false,
     advancedFilters: [
@@ -42,14 +49,17 @@ const recipeSlice = createSlice({
         loadRecipes(state, action: PayloadAction<Recipe[]>) {
             state.recipes = action.payload;
         },
+        loadFavorites(state, action: PayloadAction<Recipe[]>) {
+            state.favorites = action.payload;
+        },
         updateSearch(state, action: PayloadAction<FilterData>) {
-            state.currentSearch = action.payload
+            state.currentSearch = action.payload;
         },
         displayBottomSheet(state, action: PayloadAction<boolean>) {
-            state.displayBottomSheet = action.payload
+            state.displayBottomSheet = action.payload;
         },
         setAdvancedFilter(state, action: PayloadAction<AdvancedFilter>) {
-            state.advancedFilters[action.payload.filterGroup] = action.payload.filter
+            state.advancedFilters[action.payload.filterGroup] = action.payload.filter;
         },
         resetStoreFilters(state) {
             state.advancedFilters = [
@@ -58,10 +68,12 @@ const recipeSlice = createSlice({
                 initialFilter,
                 initialFilter,
                 initialFilter,
-            ]
+            ];
         },
-        markAsFavorite(state, action: PayloadAction<string>) {
-            const foundIndex = state.recipes.findIndex(recipe => recipe.title === action.payload)
+        markAsFavorite(state, action: PayloadAction<Recipe>) {
+            // const foundIndex = state.recipes.findIndex(recipe => recipe.title === action.payload);
+            state.favorites.push(action.payload)
+            RecipesStorage.saveRecipes(state.favorites)
         },
     },
     extraReducers: builder => {
@@ -70,15 +82,23 @@ const recipeSlice = createSlice({
         });
         builder.addCase(loadRecipesFromApi.fulfilled, (state, action: PayloadAction<Recipe[]>) => {
             state.loading = false;
-            state.recipes = action.payload
+            state.recipes = action.payload;
         });
         builder.addCase(loadRecipesFromApi.rejected, (state) => {
-            state.recipes = []
+            state.recipes = [];
+        });
+        builder.addCase(loadRecipesFromStorage.fulfilled, (state, action: PayloadAction<Recipe[]>) => {
+            state.loading = false;
+            console.log("GOT")
+            state.favorites = action.payload;
+        });
+        builder.addCase(loadRecipesFromStorage.rejected, (state) => {
+            state.favorites = [];
         })
     }
 });
 
-export const { loadRecipes, updateSearch, displayBottomSheet, setAdvancedFilter, resetStoreFilters } = recipeSlice.actions;
+export const { loadRecipes, updateSearch, displayBottomSheet, setAdvancedFilter, resetStoreFilters, markAsFavorite } = recipeSlice.actions;
 
 export default recipeSlice.reducer;
 
@@ -90,4 +110,6 @@ export const getDisplayBottomSheet = (state: RootState) => state.recipes.display
 
 export const getFilters = (state: RootState) => state.recipes.advancedFilters;
 
-export const getSearchId = (state: RootState) => state.recipes.currentSearch.id
+export const getSearchId = (state: RootState) => state.recipes.currentSearch.id;
+
+export const getFavorites = (state: RootState) => state.recipes.favorites;
