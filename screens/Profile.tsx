@@ -18,6 +18,16 @@ const Profile = () => {
                 </LinearGradient>
                 <Text style={styles.name}>Juan González Garay</Text>
             </View>
+            <View style={styles.mediumContainer}>
+                <View style={styles.followersContainer}>
+                    <Text style={styles.subtitle}>Followers</Text>
+                    <Text style={styles.quantity}>545</Text>
+                </View>
+                <View style={styles.followersContainer}>
+                    <Text style={styles.subtitle}>Following</Text>
+                    <Text style={styles.quantity}>326</Text>
+                </View>
+            </View>
             <View style={styles.bottomContainer}>
                 <View style={styles.socialContainer}>
                     <AntDesign name="facebook-square" size={24} color="#4267B2" />
@@ -50,6 +60,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: Dimensions.get("window").height * 0.40,
     },
+    mediumContainer: {
+        backgroundColor: COLORS.Color3,
+        width: '80%',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        paddingVertical: 10,
+        borderRadius: 10,
+    },
     bottomContainer: {
 
     },
@@ -62,6 +80,21 @@ const styles = StyleSheet.create({
         fontWeight: '800',
         fontSize: 19,
         color: COLORS.Color1,
+    },
+    followersContainer: {
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    subtitle: {
+        fontWeight: '600',
+        fontSize: 16,
+        color: COLORS.Color2,
+    },
+    quantity: {
+        fontWeight: '600',
+        fontSize: 16,
+        color: COLORS.Black,
+        marginTop: 5,
     },
     name: {
         fontWeight: '700',
