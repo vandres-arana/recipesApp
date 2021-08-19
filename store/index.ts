@@ -6,8 +6,6 @@ import recipeRecucer from "./recipeSlice";
 
 const middlewares: any = [
     thunk,
-    // logger,
-    // errorHandler,
 ]
 
 const store = configureStore({
