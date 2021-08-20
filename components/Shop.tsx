@@ -34,5 +34,5 @@ export default Shop
 const styles = StyleSheet.create({
     swipeList: {
         width: Dimensions.get("window").width * 0.8,
-    }
+    },
 })

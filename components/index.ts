@@ -14,6 +14,7 @@ import FavoriteRecipes from "./FavoriteRecipes";
 import EmptyCarousel from "./EmptyCarousel";
 import Shop from "./Shop";
 import ShopListInput from "./ShopListInput";
+import PantryItem from "./PantryItem";
 
 export {
     CustomSearchBar,
@@ -32,4 +33,5 @@ export {
     EmptyCarousel,
     Shop,
     ShopListInput,
+    PantryItem,
 }

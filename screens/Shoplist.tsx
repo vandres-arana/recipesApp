@@ -22,11 +22,12 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         backgroundColor: COLORS.Color4,
+        paddingTop: 30,
     },
     title: {
         fontWeight: '800',
         fontSize: 19,
         color: COLORS.Color1,
-        marginVertical: 20,
+        marginBottom: 20,
     },
 })
