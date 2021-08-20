@@ -58,7 +58,7 @@ const FiltersBottomSheet: React.FC = () => {
                     }
                 </View>
             </View>
-            <ScrollView>
+            <ScrollView style={{backgroundColor: COLORS.Color4}}>
                 <View style={styles.filterContainer}>
                     <Text style={styles.subtitle}>Diet type</Text>
                     <BottomFilterBar barId={0} filters={DIETFILTERS} />

@@ -40,7 +40,7 @@ const RecipeCarousel: React.FC<RecipeCarouselProps> = ({
                 itemWidth={Dimensions.get('window').width * 0.80}
                 contentContainerCustomStyle={styles.carousel}
                 initialNumToRender={7}
-                ListEmptyComponent={EmptyCarousel}
+                ListEmptyComponent={() => <EmptyCarousel label="No matched recipes!" />}
             />
         </View>
     )

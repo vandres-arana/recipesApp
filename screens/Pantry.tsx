@@ -1,6 +1,6 @@
 import React from 'react'
 import { Dimensions, FlatList, StyleSheet, Text, View } from 'react-native'
-import { PantryItem } from '../components'
+import { EmptyCarousel, PantryItem } from '../components'
 import { SHOPLISTITEMS } from '../static'
 import { COLORS } from '../styles'
 
@@ -21,6 +21,7 @@ const Pantry = () => {
                 keyExtractor={keyExtractor}
                 renderItem={renderItem}
                 style={styles.list}
+                ListEmptyComponent={() => <EmptyCarousel label="You don't have any item in your pantry yet. Add one from your shoplist!" />}
             />
         </View>
     )

@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { Recipe } from '../models'
 import { getFavorites } from '../store/recipeSlice'
 import { COLORS } from '../styles'
+import EmptyCarousel from './EmptyCarousel'
 import FavoriteCard from './FavoriteCard'
 
 type FavoriteRecipesProps = {
@@ -15,7 +16,7 @@ const FavoriteRecipes: React.FC<FavoriteRecipesProps> = ({
 }) => {
     const favoriteRecipes = useSelector(getFavorites)
     const FilterItem = (props: any) => {
-        return <FavoriteCard recipe={props.item} goToRecipeDetails={goToRecipeDetails}/>
+        return <FavoriteCard recipe={props.item} goToRecipeDetails={goToRecipeDetails} />
     }
 
     const keyExtractor = (item: any, index: number) => {
@@ -30,6 +31,7 @@ const FavoriteRecipes: React.FC<FavoriteRecipesProps> = ({
                 renderItem={FilterItem}
                 keyExtractor={keyExtractor}
                 showsVerticalScrollIndicator={false}
+                ListEmptyComponent={() => <EmptyCarousel label="You don't have any favorite recipe yet. Add one!" />}
             />
         </View>
     )

@@ -7,7 +7,7 @@ import { COLORS } from '../styles';
 const Shoplist = () => {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Shoplist</Text>
+            <Text style={styles.title}>Shop list</Text>
             <ShopListInput />
             <Shop shoplistItems={SHOPLISTITEMS} />
         </View>
