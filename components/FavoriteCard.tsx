@@ -4,7 +4,7 @@ import { Recipe } from '../models'
 import { COLORS } from '../styles'
 
 const CARD_HEIGHT = 175;
-const height = Dimensions.get("window").height * 0.8;
+const height = Dimensions.get("window").height * 0.7;
 
 type FavoriteCardProps = {
     recipe: Recipe,
@@ -25,11 +25,18 @@ const FavoriteCard: React.FC<FavoriteCardProps> = ({
     const isBottom = height - CARD_HEIGHT;
     const isAppearing = height;
     const translateY = Animated.add(
-        y,
-        y.interpolate({
-            inputRange: [0, 0.00001 + index * CARD_HEIGHT],
-            outputRange: [0, -index * CARD_HEIGHT],
-            extrapolateRight: "clamp",
+        Animated.add(
+            y,
+            y.interpolate({
+                inputRange: [0, 0.00001 + index * CARD_HEIGHT],
+                outputRange: [0, -index * CARD_HEIGHT],
+                extrapolateRight: "clamp",
+            })
+        ),
+        position.interpolate({
+            inputRange: [isBottom, isAppearing],
+            outputRange: [0, -CARD_HEIGHT / 4],
+            extrapolate: "clamp",
         })
     )
     const scale = position.interpolate({
