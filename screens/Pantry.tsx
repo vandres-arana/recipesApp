@@ -1,14 +1,23 @@
 import React from 'react'
-import { Dimensions, FlatList, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, FlatList, StyleSheet, Text, View, Animated } from 'react-native'
 import { useSelector } from 'react-redux'
 import { EmptyCarousel, PantryItem } from '../components'
 import { getPantry } from '../store/recipeSlice'
 import { COLORS } from '../styles'
 
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
+
 const Pantry = () => {
     const pantryItems = useSelector(getPantry);
+
+    const y = new Animated.Value(0);
+
+    const onScroll = Animated.event([{ nativeEvent: { contentOffset: { y } } }], {
+        useNativeDriver: true,
+    });
+
     const renderItem = (props: any) => {
-        return <PantryItem item={props.item} />
+        return <PantryItem item={props.item} y={y} index={props.index} />
     }
 
     const keyExtractor = (item: any, index: number) => {
@@ -18,12 +27,15 @@ const Pantry = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Pantry</Text>
-            <FlatList
+            <AnimatedFlatList
+                scrollEventThrottle={16}
                 data={pantryItems}
                 keyExtractor={keyExtractor}
                 renderItem={renderItem}
                 style={styles.list}
+                showsVerticalScrollIndicator={false}
                 ListEmptyComponent={() => <EmptyCarousel label="You don't have any item in your pantry yet. Add one from your shoplist!" />}
+                {...{ onScroll }}
             />
         </View>
     )

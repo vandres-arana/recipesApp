@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dimensions, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { ShoptItem } from '../models';
 import EmptyCarousel from './EmptyCarousel';
