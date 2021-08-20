@@ -1,7 +1,6 @@
 import { FILTERS, DIETFILTERS, HEALTHFILTERS, CUISINEFILTERS, MEALFILTERS, DISHFILTERS } from "./filters";
-import { RECIPES } from "./recipes";
 import { LABELS } from "./labels";
-
+import { SHOPLISTITEMS } from "./shoplist";
 export {
     FILTERS,
     DIETFILTERS,
@@ -9,6 +8,6 @@ export {
     CUISINEFILTERS,
     MEALFILTERS,
     DISHFILTERS,
-    RECIPES,
     LABELS,
+    SHOPLISTITEMS,
 }

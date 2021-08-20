@@ -12,6 +12,8 @@ import BottomFilterBar from "./BottomFilterBar";
 import FavoriteCard from "./FavoriteCard";
 import FavoriteRecipes from "./FavoriteRecipes";
 import EmptyCarousel from "./EmptyCarousel";
+import Shop from "./Shop";
+import ShopListInput from "./ShopListInput";
 
 export {
     CustomSearchBar,
@@ -28,4 +30,6 @@ export {
     FavoriteCard,
     FavoriteRecipes,
     EmptyCarousel,
+    Shop,
+    ShopListInput,
 }

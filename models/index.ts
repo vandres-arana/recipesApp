@@ -6,6 +6,7 @@ import Ingredient from "./ingredient";
 import Digest from "./digest";
 import AdvancedFilter from "./advancedFilter";
 import SearchFilters from "./searchFilters";
+import ShoptItem from "./ShopItem";
 
 export {
     Recipe,
@@ -16,4 +17,5 @@ export {
     Digest,
     AdvancedFilter,
     SearchFilters,
+    ShoptItem,
 }
