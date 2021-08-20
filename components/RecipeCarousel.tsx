@@ -4,7 +4,7 @@ import RecipeCard from './RecipeCard';
 import Carousel from 'react-native-snap-carousel';
 import { Recipe } from '../models';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentSearch, getFilters, getRecipes, loadRecipesFromApi, loadRecipesFromStorage } from '../store/recipeSlice';
+import { getCurrentSearch, getFilters, getRecipes, loadIngredientsFromStorage, loadRecipesFromApi, loadRecipesFromStorage } from '../store/recipeSlice';
 import EmptyCarousel from './EmptyCarousel';
 
 type RecipeCarouselProps = {
@@ -29,6 +29,7 @@ const RecipeCarousel: React.FC<RecipeCarouselProps> = ({
             search: currentSearch,
             filters,
         }));
+        dispatch(loadIngredientsFromStorage())
     }, []);
 
     return (

@@ -1,15 +1,17 @@
 import React from 'react'
-import { StyleSheet, Text, View, KeyboardAvoidingView, } from 'react-native'
+import { StyleSheet, Text, View, } from 'react-native'
+import { useSelector } from 'react-redux';
 import { Shop, ShopListInput } from '../components';
-import { SHOPLISTITEMS } from '../static';
+import { getShopList } from '../store/recipeSlice';
 import { COLORS } from '../styles';
 
 const Shoplist = () => {
+    const shoplistItems = useSelector(getShopList);
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Shop list</Text>
             <ShopListInput />
-            <Shop shoplistItems={SHOPLISTITEMS} />
+            <Shop shoplistItems={shoplistItems} />
         </View>
     )
 }

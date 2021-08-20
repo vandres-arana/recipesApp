@@ -1,8 +1,10 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { COLORS } from '../styles'
+import { useDispatch } from 'react-redux';
+import { deleteIngredientFromPantry, sendIngredientToPantry } from '../store/recipeSlice';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 type ShopSwipeActionProps = {
     itemId: number,
@@ -11,12 +13,13 @@ type ShopSwipeActionProps = {
 const ShopSwipeAction: React.FC<ShopSwipeActionProps> = ({
     itemId,
 }) => {
+    const dispatch = useDispatch()
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.option}>
-                <Ionicons name="checkmark-done-circle-outline" size={30} color={COLORS.White} />
+            <TouchableOpacity style={styles.option} onPress={() => dispatch(sendIngredientToPantry(itemId))}>
+                <MaterialCommunityIcons name="fridge" size={30} color={COLORS.White} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.option}>
+            <TouchableOpacity style={styles.option} onPress={() => dispatch(deleteIngredientFromPantry(itemId))}>
                 <MaterialIcons name="delete-forever" size={30} color={COLORS.White} />
             </TouchableOpacity>
         </View>

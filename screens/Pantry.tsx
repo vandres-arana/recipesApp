@@ -1,10 +1,12 @@
 import React from 'react'
 import { Dimensions, FlatList, StyleSheet, Text, View } from 'react-native'
+import { useSelector } from 'react-redux'
 import { EmptyCarousel, PantryItem } from '../components'
-import { SHOPLISTITEMS } from '../static'
+import { getPantry } from '../store/recipeSlice'
 import { COLORS } from '../styles'
 
 const Pantry = () => {
+    const pantryItems = useSelector(getPantry);
     const renderItem = (props: any) => {
         return <PantryItem item={props.item} />
     }
@@ -17,7 +19,7 @@ const Pantry = () => {
         <View style={styles.container}>
             <Text style={styles.title}>Pantry</Text>
             <FlatList
-                data={SHOPLISTITEMS}
+                data={pantryItems}
                 keyExtractor={keyExtractor}
                 renderItem={renderItem}
                 style={styles.list}

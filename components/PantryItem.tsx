@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { ShoptItem } from '../models'
 import { COLORS } from '../styles'
 import { MaterialIcons } from '@expo/vector-icons';
+import { useDispatch } from 'react-redux';
+import { deleteIngredientFromPantry } from '../store/recipeSlice';
 
 type PantryItemProps = {
     item: ShoptItem,
@@ -11,10 +13,11 @@ type PantryItemProps = {
 const PantryItem: React.FC<PantryItemProps> = ({
     item,
 }) => {
+    const dispatch = useDispatch()
     return (
         <View style={styles.container}>
             <Text style={styles.label}>{item.name}</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => dispatch(deleteIngredientFromPantry(item.id))}>
                 <MaterialIcons name="delete-forever" size={30} color={COLORS.White} />
             </TouchableOpacity>
         </View>

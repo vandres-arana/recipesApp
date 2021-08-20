@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '.';
-import { AdvancedFilter, FilterData, Recipe, SearchFilters } from '../models'
+import { AdvancedFilter, FilterData, Recipe, SearchFilters, ShoptItem } from '../models'
 import RecipesService from '../services/RecipesService';
 import RecipesStorage from '../services/RecipesStorage';
 import { FILTERS } from '../static';
@@ -13,6 +13,10 @@ export const loadRecipesFromStorage = createAsyncThunk('recipes/loadRecipesFromS
     return RecipesStorage.getRecipes()
 });
 
+export const loadIngredientsFromStorage = createAsyncThunk('recipes/loadIngredientsFromStorage', () => {
+    return RecipesStorage.getIngredientList()
+});
+
 type InitialStateProps = {
     loading: boolean,
     recipes: Recipe[],
@@ -20,6 +24,7 @@ type InitialStateProps = {
     currentSearch: FilterData,
     displayBottomSheet: boolean,
     advancedFilters: FilterData[],
+    ingredientList: ShoptItem[],
 }
 
 const initialFilter: FilterData = {
@@ -39,7 +44,8 @@ const initialState: InitialStateProps = {
         initialFilter,
         initialFilter,
         initialFilter,
-    ]
+    ],
+    ingredientList: [],
 }
 
 const recipeSlice = createSlice({
@@ -88,6 +94,31 @@ const recipeSlice = createSlice({
             }
             RecipesStorage.saveRecipes(state.favorites);
         },
+        addIngredient(state, action: PayloadAction<string>) {
+            const shopItem: ShoptItem = {
+                id: new Date().getTime(),
+                name: action.payload,
+                acquired: false,
+            }
+            state.ingredientList.push(shopItem);
+            RecipesStorage.saveIngredientList(state.ingredientList);
+        },
+        sendIngredientToPantry(state, action: PayloadAction<number>) {
+            const foundIndex = state.ingredientList.findIndex(ingredient => ingredient.id === action.payload)
+            if (foundIndex < 0) {
+                return;
+            }
+            state.ingredientList[foundIndex].acquired = true;
+            RecipesStorage.saveIngredientList(state.ingredientList);
+        },
+        deleteIngredientFromPantry(state, action: PayloadAction<number>) {
+            const foundIndex = state.ingredientList.findIndex(ingredient => ingredient.id === action.payload)
+            if (foundIndex < 0) {
+                return;
+            }
+            state.ingredientList.splice(foundIndex, 1);
+            RecipesStorage.saveIngredientList(state.ingredientList);
+        },
     },
     extraReducers: builder => {
         builder.addCase(loadRecipesFromApi.pending, (state) => {
@@ -104,7 +135,6 @@ const recipeSlice = createSlice({
             })
         });
         builder.addCase(loadRecipesFromApi.rejected, (state) => {
-            console.log("REJECTED")
             state.recipes = [];
         });
         builder.addCase(loadRecipesFromStorage.fulfilled, (state, action: PayloadAction<Recipe[]>) => {
@@ -116,11 +146,17 @@ const recipeSlice = createSlice({
         });
         builder.addCase(loadRecipesFromStorage.rejected, (state) => {
             state.favorites = [];
-        })
+        });
+        builder.addCase(loadIngredientsFromStorage.fulfilled, (state, action: PayloadAction<ShoptItem[]>) => {
+            state.ingredientList = action.payload;
+        });
+        builder.addCase(loadIngredientsFromStorage.rejected, (state) => {
+            state.ingredientList = [];
+        });
     }
 });
 
-export const { loadRecipes, updateSearch, displayBottomSheet, setAdvancedFilter, resetStoreFilters, markAsFavorite } = recipeSlice.actions;
+export const { loadRecipes, updateSearch, displayBottomSheet, setAdvancedFilter, resetStoreFilters, markAsFavorite, addIngredient, sendIngredientToPantry, deleteIngredientFromPantry } = recipeSlice.actions;
 
 export default recipeSlice.reducer;
 
@@ -135,3 +171,7 @@ export const getFilters = (state: RootState) => state.recipes.advancedFilters;
 export const getSearchId = (state: RootState) => state.recipes.currentSearch.id;
 
 export const getFavorites = (state: RootState) => state.recipes.favorites;
+
+export const getShopList = (state: RootState) => state.recipes.ingredientList.filter(ingredient => ingredient.acquired === false)
+
+export const getPantry = (state: RootState) => state.recipes.ingredientList.filter(ingredient => ingredient.acquired === true)
